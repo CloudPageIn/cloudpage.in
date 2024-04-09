@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <title>Cloud Page</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-seo-dream.css">
+    <link rel="stylesheet" href="assets/css/animated.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link href="assets/images/logo-icon.png" rel="shortcut icon" type="image/x-icon" />
+<!--
+
+TemplateMo 563 SEO Dream
+
+https://templatemo.com/tm-563-seo-dream
+
+-->
+<!-- Scrolling Text Start-->
+<style>
+  /* Optional: Customize the marquee text styles */
+  .marquee {
+    width: 100%;
+    padding: 2px;
+    background-color: #f1412a; /* Blue background color */
+    color: #ffffff; /* White text color */
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 1in;
+  }
+  </style>
+  
+  </head>
+  <body>
+  
+  <!-- Marquee (Scrolling Text) -->
+  <div class="marquee">
+    <marquee behavior="scroll" direction="left" scrollamount="10">
+     \\// Vote for the GLASS ♥ Jai JanaSena  ♥ Jai PawanKalyan \\//
+    </marquee>
+  </div>
+  
+  </body>
+  </html>
+
+<!-- Scrolling Text End-->
+
+</head>
+<body>
+<!-- popUP Image start-->
+<style>
+/* Popup container styles */
+.popup-container {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  cursor: pointer; /* Add cursor pointer to indicate clickable element */
+}
+
+.popup-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+</style>
+
+</head>
+<body>
+
+<!-- First Popup Image -->
+<div id="popup1" class="popup-container" onclick="closePopup('popup1')">
+  <img src="assets/images/pop.png" alt="Popup Image 1" class="popup-image">
+  <span class="close-btn" onclick="closePopup('popup1')">&times;</span>
+</div>
+
+<!-- Second Popup Image -->
+<div id="popup2" class="popup-container" onclick="closePopup('popup2')">
+  <img src="assets/images/pop2.png" alt="Popup Image 2" class="popup-image">
+  <span class="close-btn" onclick="closePopup('popup2')">&times;</span>
+</div>
+
+<!-- Third Popup Image -->
+<div id="popup3" class="popup-container" onclick="closePopup('popup3')">
+  <img src="assets/images/pop3.png" alt="Popup Image 3" class="popup-image">
+  <span class="close-btn" onclick="closePopup('popup3')">&times;</span>
+</div>
+
+<script>
+// Function to open a specific popup
+function openPopup(popupId) {
+  var popup = document.getElementById(popupId);
+  if (popup) {
+    popup.style.display = 'block';
+    // Automatically close the popup after 2 seconds
+    setTimeout(function() {
+      closePopup(popupId);
+    }, 2000);
+
+    // Add click event listener to the popup image
+    var popupImage = popup.querySelector('.popup-image');
+    if (popupImage) {
+      popupImage.onclick = function() {
+        closePopup(popupId);
+      };
+    }
+  }
+}
+
+// Function to close a specific popup
+function closePopup(popupId) {
+  var popup = document.getElementById(popupId);
+  if (popup) {
+    popup.style.display = 'none';
+    
+    // Determine the next popup ID based on the current popup
+    var nextPopupId;
+    switch (popupId) {
+      case 'popup1':
+        nextPopupId = 'popup2';
+        break;
+      case 'popup2':
+        nextPopupId = 'popup3';
+        break;
+      case 'popup3':
+        // You can optionally loop back to the first popup or end the sequence
+        nextPopupId = ''; // Set to '' to stop further popups
+        break;
+      default:
+        nextPopupId = ''; // Set to '' if no next popup is needed
+        break;
+    }
+    
+    // Open the next popup if available
+    if (nextPopupId) {
+      openPopup(nextPopupId);
+    }
+  }
+}
+
+// Automatically open the first popup when the page loads
+window.onload = function() {
+  openPopup('popup1');
+};
+</script>
+
+</body>
+</html>
+<!-- PopUP Images end-->
+<!-- ***** Preloader End ***** -->
+<!-- SlideShowStart-->
+<style>
+  /* Container for the slideshow */
+  .slideshow-container {
+    max-width: 800px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  
+  /* Style for individual slides (images) */
+  .slide {
+    width: 100%; /* Ensure each slide takes up full width */
+    display: none; /* Hide all slides by default */
+  }
+  
+  /* Style for navigation buttons */
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 18px;
+    z-index: 1;
+  }
+  
+  .prev {
+    left: 0;
+  }
+  
+  .next {
+    right: 0;
+  }
+  </style>
+  
+  </head>
+  <body>
+  
+  <!-- Slideshow Container -->
+  <div class="slideshow-container">
+    <!-- Slides (Images) -->
+    <div class="slide">
+      <a href="https://bitli.in/vqFc7z8">
+      <img src="earnimg/axis.jpg" alt="Image 1" style="width:100%;">
+      </a>
+    </div>
+    <div class="slide">
+      <a href="https://bitli.in/R577Yu6">
+      <img src="earnimg/hdfc.jpg" alt="Image 2" style="width:100%;">
+      </a>
+    </div>
+    <div class="slide">
+      <a href="https://bitli.in/cnlGQer">
+      <img src="earnimg/sbi.jpg" alt="Image 3" style="width:100%;">
+      </a>
+    </div>
+    <!-- Add more slides (images) as needed -->
+  
+    <!-- Navigation Buttons -->
+    <a class="prev" onclick="changeSlide(-1)">&#10094; Prev</a>
+    <a class="next" onclick="changeSlide(1)">Next &#10095;</a>
+  </div>
+  
+  <script>
+  // JavaScript for Automatic Image Slideshow
+  var slideIndex = 0;
+  var slides = document.getElementsByClassName('slide');
+  var intervalId;
+  
+  // Function to show the current slide
+  function showSlide() {
+    // Hide all slides
+    for (var i = 0; i < slides.length; i++) {
+      slides[i].style.display = 'none';
+    }
+    // Display the current slide
+    slides[slideIndex].style.display = 'block';
+  }
+  
+  // Function to change slide (next/previous)
+  function changeSlide(offset) {
+    slideIndex += offset;
+    // Wrap around if end is reached
+    if (slideIndex >= slides.length) {
+      slideIndex = 0;
+    } else if (slideIndex < 0) {
+      slideIndex = slides.length - 1;
+    }
+    // Display the updated slide
+    showSlide();
+  }
+  
+  // Function to start the automatic slideshow
+  function startSlideshow() {
+    intervalId = setInterval(function() {
+      changeSlide(1); // Move to the next slide
+    }, 5000); // Change slide every 5 seconds (5000 milliseconds)
+  }
+  
+  // Function to stop the automatic slideshow
+  function stopSlideshow() {
+    clearInterval(intervalId); // Clear the interval timer
+  }
+  
+  // Display the initial slide
+  showSlide();
+  
+  // Start the automatic slideshow when the page loads
+  startSlideshow();
+  
+  // Stop the slideshow when the user interacts with navigation buttons
+  document.getElementsByClassName('prev')[0].addEventListener('click', stopSlideshow);
+  document.getElementsByClassName('next')[0].addEventListener('click', stopSlideshow);
+  </script>
+  
+  </body>
+  </html>
+<!-- SlideShowEnd-->
+</header>
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="main-nav">
+          <!-- ***** Logo Start ***** -->
+          <a href="index.html" class="logo">
+            <h4>Cloud Page <img src="assets/images/logo-icon.png" alt=""></h4>
+          </a>
+          <!-- ***** Logo End ***** -->
+          <!-- ***** Menu Start ***** -->
+          <ul class="nav">
+            <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
+            <li class="scroll-to-section"><a href="https://info.cloudpage.in">Info</a></li>
+            <li class="scroll-to-section"><a href="#services">Services</a></li>
+            <li class="scroll-to-section"><a href="#contact">Contact Us</a></li> 
+            <li class="scroll-to-section"><div class="main-blue-button"><a href="#contact">Get Your Quote</a></div></li> 
+          </ul>        
+          <a class='menu-trigger'>
+              <span>Menu</span>
+          </a>
+          <!-- ***** Menu End ***** -->
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<div id="services" class="our-services section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3">
+        <div class="section-heading wow bounceIn" data-wow-duration="1s" data-wow-delay="0.2s">
+          <h6>Our Services</h6>
+          <h2>Discover What We Do &amp; <span>Offer</span> To Our <em>Clients</em></h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="service-item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="icon">
+                <img src="assets/images/service-icon-01.png" alt="">
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="right-content">
+                <h4>Similar Websites</h4>
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dormque laudantium.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="service-item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.4s">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="icon">
+                <img src="assets/images/service-icon-02.png" alt="">
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="right-content">
+                <h4>Website Trends</h4>
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dormque laudantium.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="service-item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.5s">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="icon">
+                <img src="assets/images/service-icon-03.png" alt="">
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="right-content">
+                <h4>Traffic Analysis</h4>
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dormque laudantium.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="service-item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.6s">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="icon">
+                <img src="assets/images/service-icon-03.png" alt="">
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="right-content">
+                <h4>Optimizing Keywords</h4>
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dormque laudantium.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="service-item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.7s">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="icon">
+                <img src="assets/images/service-icon-01.png" alt="">
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="right-content">
+                <h4>Page Optimizations</h4>
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dormque laudantium.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="service-item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.8s">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="icon">
+                <img src="assets/images/service-icon-02.png" alt="">
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="right-content">
+                <h4>Deep URL Analysis</h4>
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dormque laudantium.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="contact" class="contact-us section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.25s">
+        <form id="contact" action="https://formsubmit.co/cloudpagecare@gmail.com" method="post">
+          <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+              <div class="section-heading">
+                <h6>Contact Us</h6>
+                <h2>Fill Out The Form Below To <span>Get</span> In <em>Touch</em> With Us</h2>
+              </div>
+            </div>
+            <div class="col-lg-9">
+              <div class="row">
+                <div class="col-lg-6">
+                  <fieldset>
+                    <input type="name" name="name" id="name" placeholder="Name" autocomplete="on" required>
+                  </fieldset>
+                </div>
+                <div class="col-lg-6">
+                  <fieldset>
+                    <input type="number" name="mobile" id="Mobile" placeholder="Mobile" autocomplete="on" required>
+                  </fieldset>
+                </div>
+                <div class="col-lg-6">
+                  <fieldset>
+                    <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email" required="">
+                  </fieldset>
+                </div>
+                <div class="col-lg-6">
+                  <fieldset>
+                      <select name="subject" id="subject" required style="width: 100%;">
+                          <option value="">Select a Subject</option>
+                          <option value="Web Hosting">Web Hosting</option>
+                          <option value="Data Store">Data Store</option>
+                          <option value="Infrastructure">Infrastructure</option>
+                      </select>
+                  </fieldset>
+              </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <textarea name="message" type="text" class="form-control" id="message" placeholder="Message" required=""></textarea>  
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <button type="submit" id="form-submit" class="main-button ">Send Message Now</button>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="contact-info">
+                <ul>
+                  <li>
+                    <div class="icon">
+                      <img src="assets/images/contact-icon-01.png" alt="email icon">
+                    </div>
+                    <a href="#">info@cloudpage.in</a>
+                  </li>
+                  <li>
+                    <div class="icon">
+                      <img src="assets/images/contact-icon-02.png" alt="phone">
+                    </div>
+                    <a href="#">t.me/CP6277 (Telegram)</a>
+                  </li>
+                  <li>
+                    <div class="icon">
+                      <img src="assets/images/contact-icon-03.png" alt="location">
+                    </div>
+                    <a href="#">Kakinada, Andhra Pradesh</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <p>Copyright © 2024 CloudPage Ltd. All Rights Reserved. 
+        
+        <br>Web Designed by <a rel="nofollow" href="https://cloudpage.in" title="cloudpage">CloudPage</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/owl-carousel.js"></script>
+<script src="assets/js/animation.js"></script>
+<script src="assets/js/imagesloaded.js"></script>
+<script src="assets/js/custom.js"></script>
+
+</body>
+</html>
