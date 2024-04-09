@@ -1,27 +1,29 @@
-name: Sync GitHub to AWS S3
+name: Sync to AWS S3
 
 on:
   push:
     branches:
-      - main  # Trigger the workflow on pushes to the main branch
+      - main  # Trigger on push to the main branch (update branch name as needed)
 
 jobs:
-  sync_to_s3:
+  sync:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2  # Checkout the repository's code
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - name: Install AWS CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y awscli  # Install AWS CLI
+      - name: Set up AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Sync files to S3
-        run: |
-          aws s3 sync . s3://www.cloudpage.in --delete
+      - name: Sync files to AWS S3
+        uses: aws-actions/aws-s3-sync@v2
+        with:
+          args: --delete --exclude "*.git*"
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}  # AWS access key ID
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  # AWS secret access key
-          AWS_DEFAULT_REGION: ap-south-1  # AWS region where your S3 bucket is located
+          AWS_S3_BUCKET: www.cloudpage.in
+          SOURCE_DIR: .
