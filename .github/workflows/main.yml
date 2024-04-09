@@ -6,7 +6,7 @@ on:
       - main  # Trigger on push to the main branch (update branch name as needed)
 
 jobs:
-  sync:
+  sync_to_s3:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,9 +21,8 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Sync files to AWS S3
-        uses: mamidi9494/cloudpage.in
+        uses: actions/aws/cli@v2
         with:
-          args: --delete --exclude "*.git*"
+          args: s3 sync . s3://${{ env.AWS_S3_BUCKET }}/ --delete --exclude ".git*"
         env:
           AWS_S3_BUCKET: www.cloudpage.in
-          SOURCE_DIR: .
