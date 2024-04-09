@@ -21,7 +21,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Sync files to AWS S3
-        uses: mamidi9494/cloudpage.in@v2
+        uses: mamidi9494/cloudpage.in
         with:
           args: --delete --exclude "*.git*"
         env:
