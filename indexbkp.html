@@ -35,7 +35,7 @@ https://templatemo.com/tm-563-seo-dream
   .marquee {
     width: 100%;
     padding: 2px;
-    background-color: #f1412a; /* Blue background color */
+    background-color: #3d3838a9; /* Blue background color */
     color: #ffffff; /* White text color */
     font-size: 24px;
     font-weight: bold;
@@ -93,6 +93,7 @@ https://templatemo.com/tm-563-seo-dream
 <body>
 
 <!-- First Popup Image -->
+
 <div id="popup1" class="popup-container" onclick="closePopup('popup1')">
   <img src="assets/images/pop.png" alt="Popup Image 1" class="popup-image">
   <span class="close-btn" onclick="closePopup('popup1')">&times;</span>
@@ -195,7 +196,7 @@ window.onload = function() {
     top: 50%;
     transform: translateY(-50%);
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(56, 53, 53, 0.5);
     color: #fff;
     font-size: 18px;
     z-index: 1;
@@ -213,22 +214,65 @@ window.onload = function() {
   </head>
   <body>
   
+<!-- Slideshow Container -->
+<style>
+  /* Slideshow container */
+  .slideshow-container {
+    position: relative;
+    max-width: 50%;
+    overflow: hidden;
+  }
+  
+  /* Hide all slides by default */
+  .slide {
+    display: none;
+  }
+  
+  /* Navigation buttons */
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px;
+    background-color: rgba(53, 49, 49, 0.5);
+    color: #fff;
+    z-index: 100;
+  }
+  
+  .prev {
+    left: 0;
+  }
+  
+  .next {
+    right: 0;
+  }
+  
+  /* Image styling */
+  .slide img {
+    width: 100%;
+  }
+  
+  </style>
+  </head>
+  <body>
+  
   <!-- Slideshow Container -->
   <div class="slideshow-container">
     <!-- Slides (Images) -->
     <div class="slide">
-      <a href="https://bitli.in/vqFc7z8">
-      <img src="earnimg/axis.jpg" alt="Image 1" style="width:100%;">
+      <a href="https://bitli.in/vqFc7z8" target="_blank">
+        <img src="earnimg/axis.jpg" alt="Image 1">
       </a>
     </div>
     <div class="slide">
-      <a href="https://bitli.in/R577Yu6">
-      <img src="earnimg/hdfc.jpg" alt="Image 2" style="width:100%;">
+      <a href="https://bitli.in/R577Yu6" target="_blank">
+        <img src="earnimg/hdfc.jpg" alt="Image 2">
       </a>
     </div>
     <div class="slide">
-      <a href="https://bitli.in/cnlGQer">
-      <img src="earnimg/sbi.jpg" alt="Image 3" style="width:100%;">
+      <a href="https://bitli.in/cnlGQer" target="_blank">
+        <img src="earnimg/sbi.jpg" alt="Image 3">
       </a>
     </div>
     <!-- Add more slides (images) as needed -->
@@ -288,6 +332,16 @@ window.onload = function() {
   // Stop the slideshow when the user interacts with navigation buttons
   document.getElementsByClassName('prev')[0].addEventListener('click', stopSlideshow);
   document.getElementsByClassName('next')[0].addEventListener('click', stopSlideshow);
+  
+  // Intercept slide image clicks to open links in popup
+  var slideImages = document.querySelectorAll('.slide img');
+  slideImages.forEach(function(img) {
+    img.addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent default link behavior
+      var url = img.parentNode.href; // Get the link URL
+      window.open(url, '_blank', 'width=800,height=600'); // Open link in popup window
+    });
+  });
   </script>
   
   </body>
