@@ -95,21 +95,18 @@ https://templatemo.com/tm-563-seo-dream
 <!-- First Popup Image -->
 
 <div id="popup1" class="popup-container" onclick="closePopup('popup1')">
-  <img src="assets/images/pop.png" alt="Popup Image 1" class="popup-image">
+  <img src="assets/images/pop2.png" alt="Popup Image 1" class="popup-image">
   <span class="close-btn" onclick="closePopup('popup1')">&times;</span>
 </div>
 
 <!-- Second Popup Image -->
 <div id="popup2" class="popup-container" onclick="closePopup('popup2')">
-  <img src="assets/images/pop2.png" alt="Popup Image 2" class="popup-image">
+  <img src="assets/images/pop3.png" alt="Popup Image 2" class="popup-image">
   <span class="close-btn" onclick="closePopup('popup2')">&times;</span>
 </div>
 
 <!-- Third Popup Image -->
-<div id="popup3" class="popup-container" onclick="closePopup('popup3')">
-  <img src="assets/images/pop3.png" alt="Popup Image 3" class="popup-image">
-  <span class="close-btn" onclick="closePopup('popup3')">&times;</span>
-</div>
+
 
 <script>
 // Function to open a specific popup
@@ -347,6 +344,39 @@ window.onload = function() {
   </body>
   </html>
 <!-- SlideShowEnd-->
+<!-- drop down menu start-->
+<style>
+/* Dropdown styles */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #91c7ee72;
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(2, 7, 11, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 2px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #656565;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+</style>
+<!-- drop down menu ends-->
 </header>
 <!-- ***** Header Area Start ***** -->
 <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
@@ -362,10 +392,20 @@ window.onload = function() {
           <!-- ***** Menu Start ***** -->
           <ul class="nav">
             <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-            <li class="scroll-to-section"><a href="https://info.cloudpage.in">Info</a></li>
+            <li class="scroll-to-section"><a href='/info/index.html'>Info</a></li>    
             <li class="scroll-to-section"><a href="#services">Services</a></li>
             <li class="scroll-to-section"><a href="#contact">Contact Us</a></li> 
-            <li class="scroll-to-section"><div class="main-blue-button"><a href="#contact">Get Your Quote</a></div></li> 
+            <!-- New Dropdown Menu -->
+            <li class="dropdown">
+              <a href="#" class="dropbtn">Useful Links &#9662;</a>
+              <div class="dropdown-content">
+                <a href="https://eportal.incometax.gov.in/iec/foservices/#/pre-login/instant-e-pan/getNewEpan" target="_blank">Instanr PAN</a>
+                <a href="https://eportal.incometax.gov.in/iec/foservices/#/pre-login/instant-e-pan/checkStatusDownloadEpan" target="_blank">Download e-PAN</a>
+                <a href="https://myaadhaar.uidai.gov.in/genricDownloadAadhaar" target="_blank">Aadhar Download</a>
+              </div>
+            </li>
+            <!-- End of Dropdown Menu -->
+            <li class="scroll-to-section"><div class="main-blue-button"><a href="#contact">Get Your Quote</a></div></li>
           </ul>        
           <a class='menu-trigger'>
               <span>Menu</span>
@@ -598,6 +638,5 @@ window.onload = function() {
 <script src="assets/js/animation.js"></script>
 <script src="assets/js/imagesloaded.js"></script>
 <script src="assets/js/custom.js"></script>
-
 </body>
 </html>
