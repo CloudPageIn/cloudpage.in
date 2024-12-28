@@ -3,23 +3,18 @@ name: Sync to AWS S3 and Invalidate CloudFront Cache
 on:
   push:
     branches:
-      - main  # Trigger on push to the main branch (update branch name as needed)
+      - main  # Trigger the workflow on push to the main branch
 
 jobs:
   sync_to_s3_and_invalidate_cache:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash -eux {0}
 
     steps:
+      # Step 1: Checkout the code from the repository
       - name: Checkout repository
         uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.TOKEN }}
-          repository: mamidi9494/cloudpage.in
-          ref: main
 
+      # Step 2: Configure AWS credentials using GitHub Secrets
       - name: Set up AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -27,20 +22,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Install AWS CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y awscli
-
+      # Step 3: Sync files to the S3 bucket
       - name: Sync files to AWS S3
         run: |
           aws s3 sync . s3://${{ secrets.AWS_S3_BUCKET }}/ --delete --exclude ".git*"
-        env:
-          AWS_S3_BUCKET: www.cloudpage.in
 
+      # Step 4: Invalidate the CloudFront cache
       - name: Create CloudFront cache invalidation
         run: |
-          DISTRIBUTION_ID="${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}"
-          aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
-        env:
-          AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
