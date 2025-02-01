@@ -13,6 +13,8 @@ jobs:
       # Step 1: Checkout the code from the repository
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          repository: CloudPageIn/cloudpage.in
 
       # Step 2: Configure AWS credentials using GitHub Secrets
       - name: Set up AWS credentials
