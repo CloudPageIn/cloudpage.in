@@ -15,6 +15,9 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: CloudPageIn/cloudpage.in
+          # role-to-assume: 
+          # role-session-name:
+          # aws-region: 
 
       # Step 2: Configure AWS credentials using GitHub Secrets
       - name: Set up AWS credentials
