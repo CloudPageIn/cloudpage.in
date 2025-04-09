@@ -15,6 +15,9 @@
     }
     .audio-controls { margin-top: 10px; }
     input[type="number"] { width: 80px; margin-right: 10px; }
+    #status { font-weight: bold; color: #333; margin-top: 10px; }
+    #videoPreview { margin-top: 15px; display: none; max-width: 100%; border: 1px solid #ccc; }
+    #downloadLink { display: none; margin-top: 10px; }
   </style>
 </head>
 <body>
@@ -47,7 +50,8 @@
   <div class="section">
     <button id="generateVideo">Generate Video</button>
     <p id="status"></p>
-    <a id="downloadLink" style="display:none;">Download Video</a>
+    <video id="videoPreview" controls></video>
+    <a id="downloadLink">📥 Download Final Video</a>
   </div>
 
   <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.12.6/dist/ffmpeg.min.js"></script>
@@ -99,12 +103,14 @@
       const { createFFmpeg, fetchFile } = FFmpeg;
       const ffmpeg = createFFmpeg({ log: true });
       const status = document.getElementById('status');
-      status.innerText = '⏳ Loading FFmpeg...';
+      const videoPreview = document.getElementById('videoPreview');
+      const downloadLink = document.getElementById('downloadLink');
 
+      status.innerText = '⏳ Loading FFmpeg...';
       try {
         await ffmpeg.load();
 
-        status.innerText = '🖼️ Rendering image...';
+        status.innerText = '🖼️ Preparing image...';
         let imageBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
         ffmpeg.FS('writeFile', 'input.png', await fetchFile(imageBlob));
 
@@ -119,7 +125,7 @@
         const end = parseFloat(document.getElementById('endTime').value || '10');
         const duration = end - start;
 
-        status.innerText = '🎥 Generating video...';
+        status.innerText = '🎥 Generating video... This might take a moment...';
 
         await ffmpeg.run(
           '-loop', '1',
@@ -138,14 +144,15 @@
         const videoBlob = new Blob([data.buffer], { type: 'video/mp4' });
         const videoUrl = URL.createObjectURL(videoBlob);
 
-        const link = document.getElementById('downloadLink');
-        link.href = videoUrl;
-        link.download = 'final_video.mp4';
-        link.style.display = 'block';
-        link.innerText = '📥 Download Final Video';
-        status.innerText = '✅ Video generated successfully!';
+        videoPreview.src = videoUrl;
+        videoPreview.style.display = 'block';
+        downloadLink.href = videoUrl;
+        downloadLink.download = 'final_video.mp4';
+        downloadLink.style.display = 'inline-block';
+
+        status.innerText = '✅ Video ready!';
       } catch (err) {
-        status.innerText = '❌ Error generating video: ' + err.message;
+        status.innerText = '❌ Failed to generate video: ' + err.message;
         console.error(err);
       }
     });
