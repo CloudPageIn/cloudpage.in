@@ -32,6 +32,7 @@
       font-weight: bold;
       color: #0066cc;
       margin-top: 10px;
+      white-space: pre-wrap;
     }
     #videoPreview {
       margin-top: 15px;
@@ -138,14 +139,15 @@
       status.textContent = '⏳ Initializing FFmpeg...';
       try {
         await ffmpeg.load();
+        status.textContent += '\n✅ FFmpeg Loaded';
 
-        status.textContent = '🖼️ Preparing image...';
+        status.textContent += '\n🖼️ Preparing image...';
         const imageBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
         ffmpeg.FS('writeFile', 'input.png', await fetchFile(imageBlob));
 
         const audioFile = document.getElementById('audioInput').files[0];
         if (!audioFile) {
-          status.textContent = '⚠️ Please upload an audio file.';
+          status.textContent += '\n⚠️ Please upload an audio file.';
           return;
         }
         ffmpeg.FS('writeFile', 'input.mp3', await fetchFile(audioFile));
@@ -154,15 +156,16 @@
         const end = parseFloat(document.getElementById('endTime').value || '10');
         const duration = end - start;
 
-        status.textContent = '🎥 Generating video (this may take some time)...';
+        status.textContent += `\n🎥 Generating video with fade in/out and duration ${duration}s...`;
 
         await ffmpeg.run(
           '-loop', '1',
+          '-t', String(duration),
           '-i', 'input.png',
           '-ss', String(start),
           '-t', String(duration),
           '-i', 'input.mp3',
-          '-vf', 'scale=1280:720,format=yuv420p',
+          '-vf', `fade=in:0:30,fade=out:${Math.floor(duration * 30) - 30}:30,scale=1280:720,format=yuv420p`,
           '-c:v', 'libx264',
           '-c:a', 'aac',
           '-shortest',
@@ -179,10 +182,10 @@
         downloadLink.download = 'final_video.mp4';
         downloadLink.style.display = 'inline-block';
 
-        status.textContent = '✅ Video is ready!';
+        status.textContent += '\n✅ Video is ready!';
       } catch (err) {
         console.error(err);
-        status.textContent = '❌ Error during video generation.';
+        status.textContent = '❌ Error during video generation: ' + err.message;
       }
     });
   </script>
