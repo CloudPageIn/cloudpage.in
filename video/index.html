@@ -7,7 +7,7 @@
   <style>
     body { font-family: sans-serif; padding: 20px; background: #f9f9f9; }
     .section { margin-bottom: 20px; }
-    canvas { border: 1px solid #ccc; display: block; margin-bottom: 10px; }
+    canvas { border: 1px solid #ccc; display: block; margin-bottom: 10px; max-width: 300px; height: auto; }
     .controls button {
       font-size: 12px;
       padding: 5px 10px;
@@ -90,6 +90,8 @@
         const url = URL.createObjectURL(file);
         audioPlayer.src = url;
         audioPlayer.style.display = 'block';
+        audioPlayer.load();
+        audioPlayer.play();
       }
     });
 
@@ -98,44 +100,54 @@
       const ffmpeg = createFFmpeg({ log: true });
       const status = document.getElementById('status');
       status.innerText = '⏳ Loading FFmpeg...';
-      await ffmpeg.load();
 
-      status.innerText = '🖼️ Rendering image...';
-      let imageBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-      ffmpeg.FS('writeFile', 'input.png', await fetchFile(imageBlob));
+      try {
+        await ffmpeg.load();
 
-      const audioFile = document.getElementById('audioInput').files[0];
-      ffmpeg.FS('writeFile', 'input.mp3', await fetchFile(audioFile));
+        status.innerText = '🖼️ Rendering image...';
+        let imageBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+        ffmpeg.FS('writeFile', 'input.png', await fetchFile(imageBlob));
 
-      const start = parseFloat(document.getElementById('startTime').value || '0');
-      const end = parseFloat(document.getElementById('endTime').value || '10');
-      const duration = end - start;
+        const audioFile = document.getElementById('audioInput').files[0];
+        if (!audioFile) {
+          status.innerText = '⚠️ Please upload an audio file.';
+          return;
+        }
+        ffmpeg.FS('writeFile', 'input.mp3', await fetchFile(audioFile));
 
-      status.innerText = '🎥 Generating video...';
+        const start = parseFloat(document.getElementById('startTime').value || '0');
+        const end = parseFloat(document.getElementById('endTime').value || '10');
+        const duration = end - start;
 
-      await ffmpeg.run(
-        '-loop', '1',
-        '-i', 'input.png',
-        '-ss', String(start),
-        '-t', String(duration),
-        '-i', 'input.mp3',
-        '-vf', 'format=yuv420p',
-        '-c:v', 'libx264',
-        '-c:a', 'aac',
-        '-shortest',
-        'output.mp4'
-      );
+        status.innerText = '🎥 Generating video...';
 
-      const data = ffmpeg.FS('readFile', 'output.mp4');
-      const videoBlob = new Blob([data.buffer], { type: 'video/mp4' });
-      const videoUrl = URL.createObjectURL(videoBlob);
+        await ffmpeg.run(
+          '-loop', '1',
+          '-i', 'input.png',
+          '-ss', String(start),
+          '-t', String(duration),
+          '-i', 'input.mp3',
+          '-vf', 'scale=1280:720,format=yuv420p',
+          '-c:v', 'libx264',
+          '-c:a', 'aac',
+          '-shortest',
+          'output.mp4'
+        );
 
-      const link = document.getElementById('downloadLink');
-      link.href = videoUrl;
-      link.download = 'final_video.mp4';
-      link.style.display = 'block';
-      link.innerText = '📥 Download Final Video';
-      status.innerText = '✅ Video generated successfully!';
+        const data = ffmpeg.FS('readFile', 'output.mp4');
+        const videoBlob = new Blob([data.buffer], { type: 'video/mp4' });
+        const videoUrl = URL.createObjectURL(videoBlob);
+
+        const link = document.getElementById('downloadLink');
+        link.href = videoUrl;
+        link.download = 'final_video.mp4';
+        link.style.display = 'block';
+        link.innerText = '📥 Download Final Video';
+        status.innerText = '✅ Video generated successfully!';
+      } catch (err) {
+        status.innerText = '❌ Error generating video: ' + err.message;
+        console.error(err);
+      }
     });
   </script>
 </body>
