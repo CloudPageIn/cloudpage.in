@@ -1,32 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Image to Video with Audio</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; background: #f9f9f9; }
-    .section { margin-bottom: 20px; }
-    canvas { border: 1px solid #ccc; display: block; margin-bottom: 10px; max-width: 300px; height: auto; }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+    canvas {
+      border: 1px solid #ccc;
+      display: block;
+      margin-bottom: 10px;
+      max-width: 300px;
+    }
     .controls button {
       font-size: 12px;
       padding: 5px 10px;
-      margin-right: 5px;
+      margin: 5px 5px 5px 0;
     }
-    .audio-controls { margin-top: 10px; }
-    input[type="number"] { width: 80px; margin-right: 10px; }
-    #status { font-weight: bold; color: #333; margin-top: 10px; }
-    #videoPreview { margin-top: 15px; display: none; max-width: 100%; border: 1px solid #ccc; }
-    #downloadLink { display: none; margin-top: 10px; }
+    .audio-controls {
+      margin-top: 10px;
+    }
+    input[type="number"] {
+      width: 80px;
+      margin-right: 10px;
+    }
+    #status {
+      font-weight: bold;
+      color: #0066cc;
+      margin-top: 10px;
+    }
+    #videoPreview {
+      margin-top: 15px;
+      display: none;
+      max-width: 100%;
+      border: 1px solid #ccc;
+    }
+    #downloadLink {
+      display: none;
+      margin-top: 10px;
+      font-weight: bold;
+      color: green;
+    }
   </style>
 </head>
 <body>
   <h1>🖼️ Image to Video with Audio 🎵</h1>
 
-  <div class="section">
+  <div>
     <label>Upload Image:</label>
-    <input type="file" id="imageInput" accept="image/*" />
-    <br/><canvas id="imageCanvas"></canvas>
+    <input type="file" id="imageInput" accept="image/*">
+    <canvas id="imageCanvas"></canvas>
     <div class="controls">
       <label>Filters:</label>
       <button onclick="applyFilter('grayscale(100%)')">Grayscale</button>
@@ -37,34 +64,37 @@
     </div>
   </div>
 
-  <div class="section">
+  <div>
     <label>Upload Audio:</label>
-    <input type="file" id="audioInput" accept="audio/*" />
+    <input type="file" id="audioInput" accept="audio/*">
     <div class="audio-controls">
       <audio id="audioPlayer" controls style="display: none;"></audio>
     </div>
-    <label>Trim Start (sec): <input type="number" id="startTime" value="0" step="1" /></label>
-    <label>Trim End (sec): <input type="number" id="endTime" value="10" step="1" /></label>
+    <label>Trim Start (sec): <input type="number" id="startTime" value="0" step="1"></label>
+    <label>Trim End (sec): <input type="number" id="endTime" value="10" step="1"></label>
   </div>
 
-  <div class="section">
+  <div>
     <button id="generateVideo">Generate Video</button>
-    <p id="status"></p>
+    <p id="status">Ready</p>
     <video id="videoPreview" controls></video>
     <a id="downloadLink">📥 Download Final Video</a>
   </div>
 
   <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.12.6/dist/ffmpeg.min.js"></script>
   <script>
-    let canvas = document.getElementById('imageCanvas');
-    let ctx = canvas.getContext('2d');
+    const canvas = document.getElementById('imageCanvas');
+    const ctx = canvas.getContext('2d');
+    const status = document.getElementById('status');
     let currentImage = null;
     let filter = 'none';
 
     document.getElementById('imageInput').addEventListener('change', function(e) {
-      let reader = new FileReader();
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
       reader.onload = function(event) {
-        let img = new Image();
+        const img = new Image();
         img.onload = function() {
           canvas.width = img.width;
           canvas.height = img.height;
@@ -72,10 +102,10 @@
           ctx.drawImage(img, 0, 0);
           canvas.style.filter = filter;
           currentImage = img;
-        }
+        };
         img.src = event.target.result;
-      }
-      reader.readAsDataURL(e.target.files[0]);
+      };
+      reader.readAsDataURL(file);
     });
 
     function applyFilter(cssFilter) {
@@ -102,21 +132,20 @@
     document.getElementById('generateVideo').addEventListener('click', async function() {
       const { createFFmpeg, fetchFile } = FFmpeg;
       const ffmpeg = createFFmpeg({ log: true });
-      const status = document.getElementById('status');
       const videoPreview = document.getElementById('videoPreview');
       const downloadLink = document.getElementById('downloadLink');
 
-      status.innerText = '⏳ Loading FFmpeg...';
+      status.textContent = '⏳ Initializing FFmpeg...';
       try {
         await ffmpeg.load();
 
-        status.innerText = '🖼️ Preparing image...';
-        let imageBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+        status.textContent = '🖼️ Preparing image...';
+        const imageBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
         ffmpeg.FS('writeFile', 'input.png', await fetchFile(imageBlob));
 
         const audioFile = document.getElementById('audioInput').files[0];
         if (!audioFile) {
-          status.innerText = '⚠️ Please upload an audio file.';
+          status.textContent = '⚠️ Please upload an audio file.';
           return;
         }
         ffmpeg.FS('writeFile', 'input.mp3', await fetchFile(audioFile));
@@ -125,7 +154,7 @@
         const end = parseFloat(document.getElementById('endTime').value || '10');
         const duration = end - start;
 
-        status.innerText = '🎥 Generating video... This might take a moment...';
+        status.textContent = '🎥 Generating video (this may take some time)...';
 
         await ffmpeg.run(
           '-loop', '1',
@@ -150,10 +179,10 @@
         downloadLink.download = 'final_video.mp4';
         downloadLink.style.display = 'inline-block';
 
-        status.innerText = '✅ Video ready!';
+        status.textContent = '✅ Video is ready!';
       } catch (err) {
-        status.innerText = '❌ Failed to generate video: ' + err.message;
         console.error(err);
+        status.textContent = '❌ Error during video generation.';
       }
     });
   </script>
