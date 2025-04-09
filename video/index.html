@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image to Video with Audio</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f9f9f9; }
+    .section { margin-bottom: 20px; }
+    canvas { border: 1px solid #ccc; display: block; margin-bottom: 10px; }
+    .controls button {
+      font-size: 12px;
+      padding: 5px 10px;
+      margin-right: 5px;
+    }
+    .audio-controls { margin-top: 10px; }
+    input[type="number"] { width: 80px; margin-right: 10px; }
+  </style>
+</head>
+<body>
+  <h1>🖼️ Image to Video with Audio 🎵</h1>
+
+  <div class="section">
+    <label>Upload Image:</label>
+    <input type="file" id="imageInput" accept="image/*" />
+    <br/><canvas id="imageCanvas"></canvas>
+    <div class="controls">
+      <label>Filters:</label>
+      <button onclick="applyFilter('grayscale(100%)')">Grayscale</button>
+      <button onclick="applyFilter('sepia(100%)')">Sepia</button>
+      <button onclick="applyFilter('brightness(120%)')">Brightness</button>
+      <button onclick="applyFilter('contrast(150%)')">Contrast</button>
+      <button onclick="resetFilter()">Reset</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <label>Upload Audio:</label>
+    <input type="file" id="audioInput" accept="audio/*" />
+    <div class="audio-controls">
+      <audio id="audioPlayer" controls style="display: none;"></audio>
+    </div>
+    <label>Trim Start (sec): <input type="number" id="startTime" value="0" step="1" /></label>
+    <label>Trim End (sec): <input type="number" id="endTime" value="10" step="1" /></label>
+  </div>
+
+  <div class="section">
+    <button id="generateVideo">Generate Video</button>
+    <p id="status"></p>
+    <a id="downloadLink" style="display:none;">Download Video</a>
+  </div>
+
+  <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.12.6/dist/ffmpeg.min.js"></script>
+  <script>
+    let canvas = document.getElementById('imageCanvas');
+    let ctx = canvas.getContext('2d');
+    let currentImage = null;
+    let filter = 'none';
+
+    document.getElementById('imageInput').addEventListener('change', function(e) {
+      let reader = new FileReader();
+      reader.onload = function(event) {
+        let img = new Image();
+        img.onload = function() {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0);
+          canvas.style.filter = filter;
+          currentImage = img;
+        }
+        img.src = event.target.result;
+      }
+      reader.readAsDataURL(e.target.files[0]);
+    });
+
+    function applyFilter(cssFilter) {
+      filter = cssFilter;
+      canvas.style.filter = cssFilter;
+    }
+
+    function resetFilter() {
+      applyFilter('none');
+    }
+
+    document.getElementById('audioInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const audioPlayer = document.getElementById('audioPlayer');
+        const url = URL.createObjectURL(file);
+        audioPlayer.src = url;
+        audioPlayer.style.display = 'block';
+      }
+    });
+
+    document.getElementById('generateVideo').addEventListener('click', async function() {
+      const { createFFmpeg, fetchFile } = FFmpeg;
+      const ffmpeg = createFFmpeg({ log: true });
+      const status = document.getElementById('status');
+      status.innerText = '⏳ Loading FFmpeg...';
+      await ffmpeg.load();
+
+      status.innerText = '🖼️ Rendering image...';
+      let imageBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+      ffmpeg.FS('writeFile', 'input.png', await fetchFile(imageBlob));
+
+      const audioFile = document.getElementById('audioInput').files[0];
+      ffmpeg.FS('writeFile', 'input.mp3', await fetchFile(audioFile));
+
+      const start = parseFloat(document.getElementById('startTime').value || '0');
+      const end = parseFloat(document.getElementById('endTime').value || '10');
+      const duration = end - start;
+
+      status.innerText = '🎥 Generating video...';
+
+      await ffmpeg.run(
+        '-loop', '1',
+        '-i', 'input.png',
+        '-ss', String(start),
+        '-t', String(duration),
+        '-i', 'input.mp3',
+        '-vf', 'format=yuv420p',
+        '-c:v', 'libx264',
+        '-c:a', 'aac',
+        '-shortest',
+        'output.mp4'
+      );
+
+      const data = ffmpeg.FS('readFile', 'output.mp4');
+      const videoBlob = new Blob([data.buffer], { type: 'video/mp4' });
+      const videoUrl = URL.createObjectURL(videoBlob);
+
+      const link = document.getElementById('downloadLink');
+      link.href = videoUrl;
+      link.download = 'final_video.mp4';
+      link.style.display = 'block';
+      link.innerText = '📥 Download Final Video';
+      status.innerText = '✅ Video generated successfully!';
+    });
+  </script>
+</body>
+</html>
