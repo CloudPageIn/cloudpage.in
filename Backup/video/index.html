@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image to Video with Audio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+    canvas {
+      border: 1px solid #ccc;
+      display: block;
+      margin-bottom: 10px;
+      max-width: 300px;
+    }
+    .controls button {
+      font-size: 12px;
+      padding: 5px 10px;
+      margin: 5px 5px 5px 0;
+    }
+    .audio-controls {
+      margin-top: 10px;
+    }
+    input[type="number"] {
+      width: 80px;
+      margin-right: 10px;
+    }
+    #status {
+      font-weight: bold;
+      color: #0066cc;
+      margin-top: 10px;
+      white-space: pre-wrap;
+    }
+    #videoPreview {
+      margin-top: 15px;
+      display: none;
+      max-width: 100%;
+      border: 1px solid #ccc;
+    }
+    #downloadLink {
+      display: none;
+      margin-top: 10px;
+      font-weight: bold;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h1>🖼️ Image to Video with Audio 🎵</h1>
+
+  <div>
+    <label>Upload Image:</label>
+    <input type="file" id="imageInput" accept="image/*">
+    <canvas id="imageCanvas"></canvas>
+    <div class="controls">
+      <label>Filters:</label>
+      <button onclick="applyFilter('grayscale(100%)')">Grayscale</button>
+      <button onclick="applyFilter('sepia(100%)')">Sepia</button>
+      <button onclick="applyFilter('brightness(120%)')">Brightness</button>
+      <button onclick="applyFilter('contrast(150%)')">Contrast</button>
+      <button onclick="resetFilter()">Reset</button>
+    </div>
+  </div>
+
+  <div>
+    <label>Upload Audio:</label>
+    <input type="file" id="audioInput" accept="audio/*">
+    <div class="audio-controls">
+      <audio id="audioPlayer" controls style="display: none;"></audio>
+    </div>
+    <label>Trim Start (sec): <input type="number" id="startTime" value="0" step="1"></label>
+    <label>Trim End (sec): <input type="number" id="endTime" value="10" step="1"></label>
+  </div>
+
+  <div>
+    <button id="generateVideo">Generate Video</button>
+    <p id="status">Ready</p>
+    <video id="videoPreview" controls></video>
+    <a id="downloadLink">📥 Download Final Video</a>
+  </div>
+
+  <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.12.6/dist/ffmpeg.min.js"></script>
+  <script>
+    const canvas = document.getElementById('imageCanvas');
+    const ctx = canvas.getContext('2d');
+    const status = document.getElementById('status');
+    let currentImage = null;
+    let filter = 'none';
+
+    document.getElementById('imageInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const img = new Image();
+        img.onload = function() {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0);
+          canvas.style.filter = filter;
+          currentImage = img;
+        };
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function applyFilter(cssFilter) {
+      filter = cssFilter;
+      canvas.style.filter = cssFilter;
+    }
+
+    function resetFilter() {
+      applyFilter('none');
+    }
+
+    document.getElementById('audioInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const audioPlayer = document.getElementById('audioPlayer');
+        const url = URL.createObjectURL(file);
+        audioPlayer.src = url;
+        audioPlayer.style.display = 'block';
+        audioPlayer.load();
+        audioPlayer.play();
+      }
+    });
+
+    document.getElementById('generateVideo').addEventListener('click', async function() {
+      const { createFFmpeg, fetchFile } = FFmpeg;
+      const ffmpeg = createFFmpeg({ log: true });
+      const videoPreview = document.getElementById('videoPreview');
+      const downloadLink = document.getElementById('downloadLink');
+
+      status.textContent = '⏳ Initializing FFmpeg...';
+      try {
+        await ffmpeg.load();
+        status.textContent += '\n✅ FFmpeg Loaded';
+
+        status.textContent += '\n🖼️ Preparing image...';
+        const imageBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+        ffmpeg.FS('writeFile', 'input.png', await fetchFile(imageBlob));
+
+        const audioFile = document.getElementById('audioInput').files[0];
+        if (!audioFile) {
+          status.textContent += '\n⚠️ Please upload an audio file.';
+          return;
+        }
+        ffmpeg.FS('writeFile', 'input.mp3', await fetchFile(audioFile));
+
+        const start = parseFloat(document.getElementById('startTime').value || '0');
+        const end = parseFloat(document.getElementById('endTime').value || '10');
+        const duration = end - start;
+
+        status.textContent += `\n🎥 Generating video with fade in/out and duration ${duration}s...`;
+
+        await ffmpeg.run(
+          '-loop', '1',
+          '-t', String(duration),
+          '-i', 'input.png',
+          '-ss', String(start),
+          '-t', String(duration),
+          '-i', 'input.mp3',
+          '-vf', `fade=in:0:30,fade=out:${Math.floor(duration * 30) - 30}:30,scale=1280:720,format=yuv420p`,
+          '-c:v', 'libx264',
+          '-c:a', 'aac',
+          '-shortest',
+          'output.mp4'
+        );
+
+        const data = ffmpeg.FS('readFile', 'output.mp4');
+        const videoBlob = new Blob([data.buffer], { type: 'video/mp4' });
+        const videoUrl = URL.createObjectURL(videoBlob);
+
+        videoPreview.src = videoUrl;
+        videoPreview.style.display = 'block';
+        downloadLink.href = videoUrl;
+        downloadLink.download = 'final_video.mp4';
+        downloadLink.style.display = 'inline-block';
+
+        status.textContent += '\n✅ Video is ready!';
+      } catch (err) {
+        console.error(err);
+        status.textContent = '❌ Error during video generation: ' + err.message;
+      }
+    });
+  </script>
+</body>
+</html>

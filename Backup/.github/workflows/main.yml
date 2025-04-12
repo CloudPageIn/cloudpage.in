@@ -1,0 +1,38 @@
+name: Sync to AWS S3 and Invalidate CloudFront Cache
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow on push to the main branch
+
+jobs:
+  sync_to_s3_and_invalidate_cache:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code from the repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          repository: CloudPageIn/cloudpage.in
+          # role-to-assume: 
+          # role-session-name:
+          # aws-region: 
+
+      # Step 2: Configure AWS credentials using GitHub Secrets
+      - name: Set up AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Step 3: Sync files to the S3 bucket
+      - name: Sync files to AWS S3
+        run: |
+          aws s3 sync . s3://${{ secrets.AWS_S3_BUCKET }}/ --delete --exclude ".git*"
+
+      # Step 4: Invalidate the CloudFront cache
+      - name: Create CloudFront cache invalidation
+        run: |
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
