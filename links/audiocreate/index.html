@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🎶 AI Music Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background: #f2f2f2;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+    }
+    textarea {
+      width: 80%;
+      height: 80px;
+      margin: 10px 0;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    audio {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎶 AI Music Generator</h1>
+  <p>Enter a music prompt like <strong>"lofi chill beats"</strong> or <strong>"epic cinematic trailer"</strong></p>
+  
+  <form id="musicForm">
+    <textarea id="prompt" placeholder="e.g. dreamy ambient synths..." required></textarea><br>
+    <button type="submit">Generate 30s Music</button>
+  </form>
+
+  <div id="musicPlayer"></div>
+
+  <script>
+    document.getElementById('musicForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const prompt = document.getElementById('prompt').value.trim();
+      if (!prompt) {
+        alert("Please enter a music prompt.");
+        return;
+      }
+
+      document.getElementById('musicPlayer').innerHTML = "🎵 Generating music... please wait (~30s)...";
+
+      try {
+        const response = await fetch('/generate-music', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ prompt })
+        });
+
+        if (!response.ok) {
+          throw new Error('Music generation failed. Try again.');
+        }
+
+        const blob = await response.blob();
+        const audioUrl = URL.createObjectURL(blob);
+
+        document.getElementById('musicPlayer').innerHTML = `
+          <audio controls src="${audioUrl}"></audio><br>
+          <a href="${audioUrl}" download="ai-music.wav">⬇️ Download Music</a>
+        `;
+      } catch (err) {
+        console.error(err);
+        document.getElementById('musicPlayer').innerHTML = `<p style="color: red;">❌ ${err.message}</p>`;
+      }
+    });
+  </script>
+</body>
+</html>
