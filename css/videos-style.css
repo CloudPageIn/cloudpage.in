@@ -223,6 +223,55 @@
     margin: 0 auto;
 }
 
+.music-category-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.music-cat-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 204, 0, 0.3);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 12px 25px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.music-cat-btn:hover {
+    background: rgba(255, 204, 0, 0.15);
+    border-color: #ffcc00;
+    color: #ffcc00;
+    transform: translateY(-2px);
+}
+
+.music-cat-btn.active {
+    background: #ffcc00;
+    border-color: #ffcc00;
+    color: #000;
+}
+
+.music-cat-btn i {
+    font-size: 16px;
+}
+
+.music-category {
+    display: none;
+}
+
+.music-category.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
 .music-feature-card {
     background: linear-gradient(135deg, rgba(255, 204, 0, 0.15), rgba(255, 204, 0, 0.05));
     padding: 50px 40px;

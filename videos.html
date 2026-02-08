@@ -132,80 +132,189 @@
                 <!-- Movie Music Tab -->
                 <div id="moviemusic-tab" class="tab-content">
                     <h2 class="section-title">Telugu Latest Movie Songs</h2>
-                    <p class="section-description">Enjoy the latest and trending Telugu movie songs</p>
+                    <p class="section-description">Select a category to watch songs</p>
                     
-                    <div class="video-grid">
-                        <div class="video-item">
-                            <div class="video-embed">
-                                <iframe src="https://www.youtube.com/embed/videoseries?list=PLcA-hZ76FkMRrGXJNwezl_jdi_CtP-goN" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <!-- Music Category Buttons -->
+                    <div class="music-category-buttons">
+                        <button class="music-cat-btn active" onclick="showMusicCategory('latest')">
+                            <i class="fas fa-fire"></i> Latest Hits
+                        </button>
+                        <button class="music-cat-btn" onclick="showMusicCategory('romantic')">
+                            <i class="fas fa-heart"></i> Romantic
+                        </button>
+                        <button class="music-cat-btn" onclick="showMusicCategory('dance')">
+                            <i class="fas fa-music"></i> Dance
+                        </button>
+                        <button class="music-cat-btn" onclick="showMusicCategory('melody')">
+                            <i class="fas fa-guitar"></i> Melody
+                        </button>
+                        <button class="music-cat-btn" onclick="showMusicCategory('item')">
+                            <i class="fas fa-star"></i> Item Songs
+                        </button>
+                        <button class="music-cat-btn" onclick="showMusicCategory('folk')">
+                            <i class="fas fa-drum"></i> Folk
+                        </button>
+                    </div>
+
+                    <!-- Latest Hits Category -->
+                    <div id="latest-category" class="music-category active">
+                        <div class="video-grid">
+                            <div class="video-item">
+                                <div class="video-embed">
+                                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <h3>Latest Telugu Hit 1</h3>
+                                <p>Trending Telugu movie song</p>
                             </div>
-                            <h3>Latest Telugu Hit Songs</h3>
-                            <p>Top trending Telugu movie songs of 2024-2025</p>
-                            <a href="https://www.youtube.com/playlist?list=PLcA-hZ76FkMRrGXJNwezl_jdi_CtP-goN" target="_blank" class="playlist-link">
-                                <i class="fas fa-list"></i> View Full Playlist
-                            </a>
-                        </div>
-                        
-                        <div class="video-item">
-                            <div class="video-embed">
-                                <iframe src="https://www.youtube.com/embed/videoseries?list=PLcA-hZ76FkMSKqnWBFUDLKC7Uum9QKXDG" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div class="video-item">
+                                <div class="video-embed">
+                                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <h3>Latest Telugu Hit 2</h3>
+                                <p>Popular Telugu cinema song</p>
                             </div>
-                            <h3>Telugu Romantic Songs</h3>
-                            <p>Beautiful love songs from Telugu cinema</p>
-                            <a href="https://www.youtube.com/playlist?list=PLcA-hZ76FkMSKqnWBFUDLKC7Uum9QKXDG" target="_blank" class="playlist-link">
-                                <i class="fas fa-list"></i> View Full Playlist
-                            </a>
-                        </div>
-                        
-                        <div class="video-item">
-                            <div class="video-embed">
-                                <iframe src="https://www.youtube.com/embed/videoseries?list=PLcA-hZ76FkMQGLWYtRxq-CM0pHbFvXz8K" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div class="video-item">
+                                <div class="video-embed">
+                                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <h3>Latest Telugu Hit 3</h3>
+                                <p>Top chart Telugu song</p>
                             </div>
-                            <h3>Telugu Dance Songs</h3>
-                            <p>Energetic dance numbers from Telugu movies</p>
-                            <a href="https://www.youtube.com/playlist?list=PLcA-hZ76FkMQGLWYtRxq-CM0pHbFvXz8K" target="_blank" class="playlist-link">
-                                <i class="fas fa-list"></i> View Full Playlist
-                            </a>
-                        </div>
-                        
-                        <div class="video-item">
-                            <div class="video-embed">
-                                <iframe src="https://www.youtube.com/embed/videoseries?list=PLcA-hZ76FkMTfxdMvF_1lXzBvCxZ8E0eJ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <h3>Telugu Melody Songs</h3>
-                            <p>Soulful melodies from Telugu film industry</p>
-                            <a href="https://www.youtube.com/playlist?list=PLcA-hZ76FkMTfxdMvF_1lXzBvCxZ8E0eJ" target="_blank" class="playlist-link">
-                                <i class="fas fa-list"></i> View Full Playlist
-                            </a>
-                        </div>
-                        
-                        <div class="video-item">
-                            <div class="video-embed">
-                                <iframe src="https://www.youtube.com/embed/videoseries?list=PLcA-hZ76FkMRLWufATKhLT8j_T0c5pqnE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <h3>Telugu Item Songs</h3>
-                            <p>Popular item numbers from Telugu cinema</p>
-                            <a href="https://www.youtube.com/playlist?list=PLcA-hZ76FkMRLWufATKhLT8j_T0c5pqnE" target="_blank" class="playlist-link">
-                                <i class="fas fa-list"></i> View Full Playlist
-                            </a>
-                        </div>
-                        
-                        <div class="video-item">
-                            <div class="video-embed">
-                                <iframe src="https://www.youtube.com/embed/videoseries?list=PLcA-hZ76FkMSvfF0B0xM0Iq8RkJHQwHLu" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <h3>Telugu Folk Songs</h3>
-                            <p>Traditional folk songs from Telugu movies</p>
-                            <a href="https://www.youtube.com/playlist?list=PLcA-hZ76FkMSvfF0B0xM0Iq8RkJHQwHLu" target="_blank" class="playlist-link">
-                                <i class="fas fa-list"></i> View Full Playlist
-                            </a>
                         </div>
                     </div>
-                    
-                    <div class="music-info">
-                        <div class="info-box">
-                            <i class="fas fa-info-circle"></i>
-                            <p>Enjoy the latest Telugu movie songs directly on our platform. Click "View Full Playlist" to explore more songs on YouTube!</p>
+
+                    <!-- Romantic Category -->
+                    <div id="romantic-category" class="music-category">
+                        <div class="video-grid">
+                            <div class="video-item">
+                                <div class="video-embed">
+                                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <h3>Romantic Song 1</h3>
+                                <p>Beautiful Telugu love song</p>
+                            </div>
+                            <div class="video-item">
+                                <div class="video-embed">
+                                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <h3>Romantic Song 2</h3>
+                                <p>Melodious love track</p>
+                            </div>
+                            <div class="video-item">
+                                <div class="video-embed">
+                                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <h3>Romantic Song 3</h3>
+                                <p>Heart touching Telugu song</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dance Category -->
+                    <div id="dance-category" class="music-category">
+                        <div class="video-grid">
+                            <div class="video-item">
+                                <div class="video-embed">
+                                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <h3>Dance Number 1</h3>
+                                <p>Energetic Telugu dance song</p>
+                            </div>
+                            <div class="video-item">
+                                <div class="video-embed">
+                                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <h3>Dance Number 2</h3>
+                                <p>Peppy Telugu dance track</p>
+                            </div>
+                            <div class="video-item">
+                                <div class="video-embed">
+                                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <h3>Dance Number 3</h3>
+                                <p>High energy Telugu song</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Melody Category -->
+                    <div id="melody-category" class="music-category">
+                        <div class="video-grid">
+                            <div class="video-item">
+                                <div class="video-embed">
+                                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <h3>Melody Song 1</h3>
+                                <p>Soulful Telugu melody</p>
+                            </div>
+                            <div class="video-item">
+                                <div class="video-embed">
+                                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <h3>Melody Song 2</h3>
+                                <p>Peaceful Telugu track</p>
+                            </div>
+                            <div class="video-item">
+                                <div class="video-embed">
+                                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <h3>Melody Song 3</h3>
+                                <p>Soft Telugu melody</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item Songs Category -->
+                    <div id="item-category" class="music-category">
+                        <div class="video-grid">
+                            <div class="video-item">
+                                <div class="video-embed">
+                                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <h3>Item Song 1</h3>
+                                <p>Popular Telugu item number</p>
+                            </div>
+                            <div class="video-item">
+                                <div class="video-embed">
+                                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <h3>Item Song 2</h3>
+                                <p>Trending item number</p>
+                            </div>
+                            <div class="video-item">
+                                <div class="video-embed">
+                                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <h3>Item Song 3</h3>
+                                <p>Hit Telugu item song</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Folk Category -->
+                    <div id="folk-category" class="music-category">
+                        <div class="video-grid">
+                            <div class="video-item">
+                                <div class="video-embed">
+                                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <h3>Folk Song 1</h3>
+                                <p>Traditional Telugu folk song</p>
+                            </div>
+                            <div class="video-item">
+                                <div class="video-embed">
+                                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <h3>Folk Song 2</h3>
+                                <p>Cultural Telugu folk music</p>
+                            </div>
+                            <div class="video-item">
+                                <div class="video-embed">
+                                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <h3>Folk Song 3</h3>
+                                <p>Village style Telugu song</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -286,6 +395,24 @@
                 document.getElementById(tabName + '-tab').classList.add('active');
                 document.querySelectorAll('.tab-btn')[tabs[tabName]].classList.add('active');
             }
+        }
+
+        function showMusicCategory(category) {
+            // Hide all music categories
+            document.querySelectorAll('.music-category').forEach(cat => {
+                cat.classList.remove('active');
+            });
+            
+            // Remove active class from all music category buttons
+            document.querySelectorAll('.music-cat-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected category
+            document.getElementById(category + '-category').classList.add('active');
+            
+            // Activate clicked button
+            event.target.closest('.music-cat-btn').classList.add('active');
         }
     </script>
 </body>
