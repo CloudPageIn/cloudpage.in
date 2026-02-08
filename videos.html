@@ -19,10 +19,6 @@
             <i class="fas fa-home"></i>
             <span>Home</span>
         </div>
-        <div class="nav-item active">
-            <i class="fas fa-video"></i>
-            <span>Videos</span>
-        </div>
         <div class="nav-item" onclick="window.location.href='services.html'">
             <i class="fas fa-laptop"></i>
             <span>Services</span>
@@ -35,9 +31,9 @@
             <i class="fas fa-envelope"></i>
             <span>Contact</span>
         </div>
-        <div class="nav-item" onclick="window.open('https://cloudpage.in', '_blank')">
-            <i class="fas fa-external-link-alt"></i>
-            <span>External</span>
+        <div class="nav-item active">
+            <i class="fas fa-video"></i>
+            <span>Videos</span>
         </div>
     </nav>
 
@@ -45,75 +41,209 @@
     <div class="main-content">
         <section class="hero-section">
             <h1 class="main-title">Our Videos</h1>
-            <p class="subtitle">Explore our devotional song collections</p>
+            <p class="subtitle">Explore our devotional songs and cloud training</p>
         </section>
 
         <section class="video-section">
             <div class="video-container">
-                <h2 class="section-title">Devotional Songs Collection</h2>
-                
-                <!-- Subscribe Button -->
-                <div class="subscribe-section">
-                    <a href="https://www.youtube.com/@Srisakthiswaram?sub_confirmation=1" target="_blank" class="subscribe-btn">
-                        <i class="fab fa-youtube"></i>
-                        Subscribe to Our Channel
-                    </a>
+                <!-- Tab Navigation -->
+                <div class="tab-navigation">
+                    <button class="tab-btn active" onclick="switchTab('devotional')">
+                        <i class="fas fa-music"></i> Devotional Songs
+                    </button>
+                    <button class="tab-btn" onclick="switchTab('moviemusic')">
+                        <i class="fas fa-film"></i> Movie Music
+                    </button>
+                    <button class="tab-btn" onclick="switchTab('cloudai')">
+                        <i class="fas fa-cloud"></i> Cloud AI Tool
+                    </button>
                 </div>
-                
-                <div class="video-grid">
-                    <div class="video-item">
-                        <div class="video-embed">
-                            <iframe src="https://www.youtube.com/embed/TrgsHgKvRtI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <h3>Mahadeva Songs</h3>
-                        <p>Divine collection of Lord Shiva devotional songs</p>
-                        <a href="https://www.youtube.com/watch?v=TrgsHgKvRtI&list=PL2Ly4y47Fpp6txzf25XkjaDkudpjW4uZn&index=2" target="_blank" class="playlist-link">
-                            <i class="fas fa-list"></i> View Full Playlist
+
+                <!-- Devotional Songs Tab -->
+                <div id="devotional-tab" class="tab-content active">
+                    <h2 class="section-title">Devotional Songs Collection</h2>
+                    
+                    <!-- Subscribe Button -->
+                    <div class="subscribe-section">
+                        <a href="https://www.youtube.com/@Srisakthiswaram?sub_confirmation=1" target="_blank" class="subscribe-btn">
+                            <i class="fab fa-youtube"></i>
+                            Subscribe to Our Channel
                         </a>
                     </div>
                     
-                    <div class="video-item">
-                        <div class="video-embed">
-                            <iframe src="https://www.youtube.com/embed/REWvEEK30hs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="video-grid">
+                        <div class="video-item">
+                            <div class="video-embed">
+                                <iframe src="https://www.youtube.com/embed/TrgsHgKvRtI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h3>Mahadeva Songs</h3>
+                            <p>Divine collection of Lord Shiva devotional songs</p>
+                            <a href="https://www.youtube.com/watch?v=TrgsHgKvRtI&list=PL2Ly4y47Fpp6txzf25XkjaDkudpjW4uZn&index=2" target="_blank" class="playlist-link">
+                                <i class="fas fa-list"></i> View Full Playlist
+                            </a>
                         </div>
-                        <h3>Durgamma Songs</h3>
-                        <p>Powerful devotional songs of Goddess Durga</p>
-                        <a href="https://www.youtube.com/watch?v=REWvEEK30hs&list=PL2Ly4y47Fpp4ej4zOjNjcX2NtR7Edi18U&index=2" target="_blank" class="playlist-link">
-                            <i class="fas fa-list"></i> View Full Playlist
-                        </a>
+                        
+                        <div class="video-item">
+                            <div class="video-embed">
+                                <iframe src="https://www.youtube.com/embed/REWvEEK30hs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h3>Durgamma Songs</h3>
+                            <p>Powerful devotional songs of Goddess Durga</p>
+                            <a href="https://www.youtube.com/watch?v=REWvEEK30hs&list=PL2Ly4y47Fpp4ej4zOjNjcX2NtR7Edi18U&index=2" target="_blank" class="playlist-link">
+                                <i class="fas fa-list"></i> View Full Playlist
+                            </a>
+                        </div>
+                        
+                        <div class="video-item">
+                            <div class="video-embed">
+                                <iframe src="https://www.youtube.com/embed/TJ13YTXf-6A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h3>Narayana Songs</h3>
+                            <p>Sacred hymns dedicated to Lord Vishnu</p>
+                            <a href="https://www.youtube.com/watch?v=TJ13YTXf-6A&list=PL2Ly4y47Fpp6GzZfN0y8mCXFlYod44Wcs&index=2" target="_blank" class="playlist-link">
+                                <i class="fas fa-list"></i> View Full Playlist
+                            </a>
+                        </div>
+                        
+                        <div class="video-item">
+                            <div class="video-embed">
+                                <iframe src="https://www.youtube.com/embed/NOySNV2odR0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h3>Shree Rama Songs</h3>
+                            <p>Melodious devotional songs of Lord Rama</p>
+                            <a href="https://www.youtube.com/watch?v=NOySNV2odR0&list=PL2Ly4y47Fpp5oGaSuqCkvYIg9RJSnM8ie&index=2" target="_blank" class="playlist-link">
+                                <i class="fas fa-list"></i> View Full Playlist
+                            </a>
+                        </div>
+                        
+                        <div class="video-item">
+                            <div class="video-embed">
+                                <iframe src="https://www.youtube.com/embed/Tp29hCBgNns" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h3>Sai Baba Songs</h3>
+                            <p>Peaceful devotional songs of Shirdi Sai Baba</p>
+                            <a href="https://www.youtube.com/watch?v=Tp29hCBgNns&list=PL2Ly4y47Fpp7V00tuIJSEJ5FdFwCwnrjA&index=1" target="_blank" class="playlist-link">
+                                <i class="fas fa-list"></i> View Full Playlist
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Movie Music Tab -->
+                <div id="moviemusic-tab" class="tab-content">
+                    <h2 class="section-title">Telugu Latest Movie Songs</h2>
+                    <p class="section-description">Enjoy the latest and trending Telugu movie songs</p>
+                    
+                    <div class="video-grid">
+                        <div class="video-item">
+                            <div class="video-embed">
+                                <iframe src="https://www.youtube.com/embed/videoseries?list=PLcA-hZ76FkMRrGXJNwezl_jdi_CtP-goN" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h3>Latest Telugu Hit Songs</h3>
+                            <p>Top trending Telugu movie songs of 2024-2025</p>
+                            <a href="https://www.youtube.com/playlist?list=PLcA-hZ76FkMRrGXJNwezl_jdi_CtP-goN" target="_blank" class="playlist-link">
+                                <i class="fas fa-list"></i> View Full Playlist
+                            </a>
+                        </div>
+                        
+                        <div class="video-item">
+                            <div class="video-embed">
+                                <iframe src="https://www.youtube.com/embed/videoseries?list=PLcA-hZ76FkMSKqnWBFUDLKC7Uum9QKXDG" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h3>Telugu Romantic Songs</h3>
+                            <p>Beautiful love songs from Telugu cinema</p>
+                            <a href="https://www.youtube.com/playlist?list=PLcA-hZ76FkMSKqnWBFUDLKC7Uum9QKXDG" target="_blank" class="playlist-link">
+                                <i class="fas fa-list"></i> View Full Playlist
+                            </a>
+                        </div>
+                        
+                        <div class="video-item">
+                            <div class="video-embed">
+                                <iframe src="https://www.youtube.com/embed/videoseries?list=PLcA-hZ76FkMQGLWYtRxq-CM0pHbFvXz8K" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h3>Telugu Dance Songs</h3>
+                            <p>Energetic dance numbers from Telugu movies</p>
+                            <a href="https://www.youtube.com/playlist?list=PLcA-hZ76FkMQGLWYtRxq-CM0pHbFvXz8K" target="_blank" class="playlist-link">
+                                <i class="fas fa-list"></i> View Full Playlist
+                            </a>
+                        </div>
+                        
+                        <div class="video-item">
+                            <div class="video-embed">
+                                <iframe src="https://www.youtube.com/embed/videoseries?list=PLcA-hZ76FkMTfxdMvF_1lXzBvCxZ8E0eJ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h3>Telugu Melody Songs</h3>
+                            <p>Soulful melodies from Telugu film industry</p>
+                            <a href="https://www.youtube.com/playlist?list=PLcA-hZ76FkMTfxdMvF_1lXzBvCxZ8E0eJ" target="_blank" class="playlist-link">
+                                <i class="fas fa-list"></i> View Full Playlist
+                            </a>
+                        </div>
+                        
+                        <div class="video-item">
+                            <div class="video-embed">
+                                <iframe src="https://www.youtube.com/embed/videoseries?list=PLcA-hZ76FkMRLWufATKhLT8j_T0c5pqnE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h3>Telugu Item Songs</h3>
+                            <p>Popular item numbers from Telugu cinema</p>
+                            <a href="https://www.youtube.com/playlist?list=PLcA-hZ76FkMRLWufATKhLT8j_T0c5pqnE" target="_blank" class="playlist-link">
+                                <i class="fas fa-list"></i> View Full Playlist
+                            </a>
+                        </div>
+                        
+                        <div class="video-item">
+                            <div class="video-embed">
+                                <iframe src="https://www.youtube.com/embed/videoseries?list=PLcA-hZ76FkMSvfF0B0xM0Iq8RkJHQwHLu" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h3>Telugu Folk Songs</h3>
+                            <p>Traditional folk songs from Telugu movies</p>
+                            <a href="https://www.youtube.com/playlist?list=PLcA-hZ76FkMSvfF0B0xM0Iq8RkJHQwHLu" target="_blank" class="playlist-link">
+                                <i class="fas fa-list"></i> View Full Playlist
+                            </a>
+                        </div>
                     </div>
                     
-                    <div class="video-item">
-                        <div class="video-embed">
-                            <iframe src="https://www.youtube.com/embed/TJ13YTXf-6A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="music-info">
+                        <div class="info-box">
+                            <i class="fas fa-info-circle"></i>
+                            <p>Enjoy the latest Telugu movie songs directly on our platform. Click "View Full Playlist" to explore more songs on YouTube!</p>
                         </div>
-                        <h3>Narayana Songs</h3>
-                        <p>Sacred hymns dedicated to Lord Vishnu</p>
-                        <a href="https://www.youtube.com/watch?v=TJ13YTXf-6A&list=PL2Ly4y47Fpp6GzZfN0y8mCXFlYod44Wcs&index=2" target="_blank" class="playlist-link">
-                            <i class="fas fa-list"></i> View Full Playlist
-                        </a>
                     </div>
+                </div>
+
+                <!-- Cloud AI Tool Tab -->
+                <div id="cloudai-tab" class="tab-content">
+                    <h2 class="section-title">Cloud Application Training</h2>
+                    <p class="section-description">Learn cloud technologies and AI tools with our comprehensive training videos</p>
                     
-                    <div class="video-item">
-                        <div class="video-embed">
-                            <iframe src="https://www.youtube.com/embed/NOySNV2odR0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="video-grid">
+                        <div class="video-item featured">
+                            <div class="video-embed large">
+                                <iframe src="https://www.youtube.com/embed/videoseries?list=PLJrwx0UufZfMn_YLlQr8g6Kqm8NbT5WCS" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h3>Cloud Application Training Series</h3>
+                            <p>Complete training course on cloud applications, AI tools, and modern cloud infrastructure. Learn from basics to advanced concepts.</p>
+                            <a href="https://www.youtube.com/playlist?list=PLJrwx0UufZfMn_YLlQr8g6Kqm8NbT5WCS" target="_blank" class="playlist-link">
+                                <i class="fas fa-play-circle"></i> Watch Full Playlist on YouTube
+                            </a>
                         </div>
-                        <h3>Shree Rama Songs</h3>
-                        <p>Melodious devotional songs of Lord Rama</p>
-                        <a href="https://www.youtube.com/watch?v=NOySNV2odR0&list=PL2Ly4y47Fpp5oGaSuqCkvYIg9RJSnM8ie&index=2" target="_blank" class="playlist-link">
-                            <i class="fas fa-list"></i> View Full Playlist
-                        </a>
                     </div>
-                    
-                    <div class="video-item">
-                        <div class="video-embed">
-                            <iframe src="https://www.youtube.com/embed/Tp29hCBgNns" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                    <div class="training-features">
+                        <div class="feature-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h4>Comprehensive Learning</h4>
+                            <p>Step-by-step tutorials covering all aspects of cloud computing</p>
                         </div>
-                        <h3>Sai Baba Songs</h3>
-                        <p>Peaceful devotional songs of Shirdi Sai Baba</p>
-                        <a href="https://www.youtube.com/watch?v=Tp29hCBgNns&list=PL2Ly4y47Fpp7V00tuIJSEJ5FdFwCwnrjA&index=1" target="_blank" class="playlist-link">
-                            <i class="fas fa-list"></i> View Full Playlist
-                        </a>
+                        <div class="feature-item">
+                            <i class="fas fa-code"></i>
+                            <h4>Hands-on Practice</h4>
+                            <p>Real-world examples and practical implementations</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-certificate"></i>
+                            <h4>Expert Guidance</h4>
+                            <p>Learn from industry professionals with years of experience</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -123,15 +253,40 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="social-links">
-            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.facebook.com/profile.php?viewas=100000686899395&id=61575153363122" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/in/cloudpage/" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.facebook.com/cloudpage.in/" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/cloudpage.in" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
             <a href="#" class="social-icon"><i class="fab fa-google-plus-g"></i></a>
             <a href="#" class="social-icon"><i class="fab fa-dribbble"></i></a>
-            <a href="https://www.instagram.com/cloudwithmind/" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
         </div>
         <p class="copyright">Copyright &copy; 2026 CloudPage Service</p>
     </footer>
 
     <script src="js/jquery-3.4.1.min.js"></script>
+    <script>
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab and activate button
+            const tabs = {
+                'devotional': 0,
+                'moviemusic': 1,
+                'cloudai': 2
+            };
+            
+            if (tabs.hasOwnProperty(tabName)) {
+                document.getElementById(tabName + '-tab').classList.add('active');
+                document.querySelectorAll('.tab-btn')[tabs[tabName]].classList.add('active');
+            }
+        }
+    </script>
 </body>
 </html>
