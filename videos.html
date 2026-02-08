@@ -136,213 +136,43 @@
                     
                     <!-- Music Category Buttons -->
                     <div class="music-category-buttons">
-                        <button class="music-cat-btn active" onclick="showMusicCategory('latest')">
+                        <button class="music-cat-btn active" onclick="loadCategorySongs('latest', 'telugu latest songs')">
                             <i class="fas fa-fire"></i> Latest Hits
                         </button>
-                        <button class="music-cat-btn" onclick="showMusicCategory('romantic')">
+                        <button class="music-cat-btn" onclick="loadCategorySongs('romantic', 'telugu romantic songs')">
                             <i class="fas fa-heart"></i> Romantic
                         </button>
-                        <button class="music-cat-btn" onclick="showMusicCategory('dance')">
+                        <button class="music-cat-btn" onclick="loadCategorySongs('dance', 'telugu dance songs')">
                             <i class="fas fa-music"></i> Dance
                         </button>
-                        <button class="music-cat-btn" onclick="showMusicCategory('melody')">
+                        <button class="music-cat-btn" onclick="loadCategorySongs('melody', 'telugu melody songs')">
                             <i class="fas fa-guitar"></i> Melody
                         </button>
-                        <button class="music-cat-btn" onclick="showMusicCategory('item')">
+                        <button class="music-cat-btn" onclick="loadCategorySongs('item', 'telugu item songs')">
                             <i class="fas fa-star"></i> Item Songs
                         </button>
-                        <button class="music-cat-btn" onclick="showMusicCategory('folk')">
+                        <button class="music-cat-btn" onclick="loadCategorySongs('folk', 'telugu folk songs')">
                             <i class="fas fa-drum"></i> Folk
                         </button>
                     </div>
 
-                    <!-- Latest Hits Category -->
-                    <div id="latest-category" class="music-category active">
-                        <div class="video-grid">
-                            <div class="video-item">
-                                <div class="video-embed">
-                                    <iframe src="https://www.youtube.com/embed/JFcgOboQZ08" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <h3>Butta Bomma</h3>
-                                <p>Ala Vaikunthapurramuloo - Latest Telugu Hit</p>
-                            </div>
-                            <div class="video-item">
-                                <div class="video-embed">
-                                    <iframe src="https://www.youtube.com/embed/6yclRgpRCHs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <h3>Saami Saami</h3>
-                                <p>Pushpa - Trending Telugu Song</p>
-                            </div>
-                            <div class="video-item">
-                                <div class="video-embed">
-                                    <iframe src="https://www.youtube.com/embed/Kp5A_1UAJog" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <h3>Oo Antava</h3>
-                                <p>Pushpa - Popular Telugu Item Song</p>
-                            </div>
+                    <!-- Dynamic Video Container -->
+                    <div id="dynamic-videos-container">
+                        <div class="video-grid" id="songs-grid">
+                            <!-- Videos will be loaded here dynamically -->
                         </div>
-                        <div class="more-videos-grid" id="latest-more" style="display: none;">
-                            <div class="video-item">
-                                <div class="video-embed">
-                                    <iframe src="https://www.youtube.com/embed/Nt9L1jCKGnE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <h3>Naatu Naatu</h3>
-                                <p>RRR - Oscar Winning Song</p>
-                            </div>
-                            <div class="video-item">
-                                <div class="video-embed">
-                                    <iframe src="https://www.youtube.com/embed/po5NQ4OzzzI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <h3>Srivalli</h3>
-                                <p>Pushpa - Blockbuster Hit</p>
-                            </div>
-                            <div class="video-item">
-                                <div class="video-embed">
-                                    <iframe src="https://www.youtube.com/embed/Yz_gzUxfYjg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <h3>Vachinde</h3>
-                                <p>Fidaa - Superhit Song</p>
-                            </div>
-                        </div>
+                        
                         <div class="load-more-btn-container">
-                            <button class="load-more-btn" onclick="loadMoreSongs('latest')">
+                            <button class="load-more-btn" id="load-more-music-btn" onclick="loadMoreMusicVideos()">
                                 <i class="fas fa-plus-circle"></i> Load More Songs
                             </button>
                         </div>
                     </div>
 
-                    <!-- Romantic Category -->
-                    <div id="romantic-category" class="music-category">
-                        <div class="video-grid">
-                            <div class="video-item">
-                                <div class="video-embed">
-                                    <iframe src="https://www.youtube.com/embed/Yd_FKH8vvaU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <h3>Inkem Inkem</h3>
-                                <p>Geetha Govindam - Beautiful Love Song</p>
-                            </div>
-                            <div class="video-item">
-                                <div class="video-embed">
-                                    <iframe src="https://www.youtube.com/embed/Wy_8_5yPe8w" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <h3>Ramuloo Ramulaa</h3>
-                                <p>Ala Vaikunthapurramuloo - Romantic Track</p>
-                            </div>
-                            <div class="video-item">
-                                <div class="video-embed">
-                                    <iframe src="https://www.youtube.com/embed/Yz_gzUxfYjg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <h3>Vachinde</h3>
-                                <p>Fidaa - Heart Touching Telugu Song</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Dance Category -->
-                    <div id="dance-category" class="music-category">
-                        <div class="video-grid">
-                            <div class="video-item">
-                                <div class="video-embed">
-                                    <iframe src="https://www.youtube.com/embed/Nt9L1jCKGnE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <h3>Naatu Naatu</h3>
-                                <p>RRR - Oscar Winning Dance Number</p>
-                            </div>
-                            <div class="video-item">
-                                <div class="video-embed">
-                                    <iframe src="https://www.youtube.com/embed/po5NQ4OzzzI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <h3>Srivalli</h3>
-                                <p>Pushpa - Energetic Dance Track</p>
-                            </div>
-                            <div class="video-item">
-                                <div class="video-embed">
-                                    <iframe src="https://www.youtube.com/embed/Ew_uRwVbRJY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <h3>Tillu Anna DJ Pedithe</h3>
-                                <p>DJ Tillu - High Energy Dance Song</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Melody Category -->
-                    <div id="melody-category" class="music-category">
-                        <div class="video-grid">
-                            <div class="video-item">
-                                <div class="video-embed">
-                                    <iframe src="https://www.youtube.com/embed/Wy_8_5yPe8w" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <h3>Ramuloo Ramulaa</h3>
-                                <p>Ala Vaikunthapurramuloo - Soulful Melody</p>
-                            </div>
-                            <div class="video-item">
-                                <div class="video-embed">
-                                    <iframe src="https://www.youtube.com/embed/Yd_FKH8vvaU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <h3>Inkem Inkem</h3>
-                                <p>Geetha Govindam - Peaceful Melody</p>
-                            </div>
-                            <div class="video-item">
-                                <div class="video-embed">
-                                    <iframe src="https://www.youtube.com/embed/Yz_gzUxfYjg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <h3>Vachinde</h3>
-                                <p>Fidaa - Soft Telugu Melody</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Item Songs Category -->
-                    <div id="item-category" class="music-category">
-                        <div class="video-grid">
-                            <div class="video-item">
-                                <div class="video-embed">
-                                    <iframe src="https://www.youtube.com/embed/Kp5A_1UAJog" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <h3>Oo Antava</h3>
-                                <p>Pushpa - Popular Telugu Item Number</p>
-                            </div>
-                            <div class="video-item">
-                                <div class="video-embed">
-                                    <iframe src="https://www.youtube.com/embed/6yclRgpRCHs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <h3>Saami Saami</h3>
-                                <p>Pushpa - Trending Item Song</p>
-                            </div>
-                            <div class="video-item">
-                                <div class="video-embed">
-                                    <iframe src="https://www.youtube.com/embed/JFcgOboQZ08" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <h3>Butta Bomma</h3>
-                                <p>Ala Vaikunthapurramuloo - Hit Item Song</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Folk Category -->
-                    <div id="folk-category" class="music-category">
-                        <div class="video-grid">
-                            <div class="video-item">
-                                <div class="video-embed">
-                                    <iframe src="https://www.youtube.com/embed/po5NQ4OzzzI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <h3>Srivalli</h3>
-                                <p>Pushpa - Traditional Folk Style</p>
-                            </div>
-                            <div class="video-item">
-                                <div class="video-embed">
-                                    <iframe src="https://www.youtube.com/embed/Nt9L1jCKGnE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <h3>Naatu Naatu</h3>
-                                <p>RRR - Cultural Telugu Folk Music</p>
-                            </div>
-                            <div class="video-item">
-                                <div class="video-embed">
-                                    <iframe src="https://www.youtube.com/embed/Yz_gzUxfYjg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <h3>Vachinde</h3>
-                                <p>Fidaa - Village Style Telugu Song</p>
-                            </div>
+                    <div class="music-info" style="margin-top: 30px;">
+                        <div class="info-box">
+                            <i class="fas fa-info-circle"></i>
+                            <p>Songs are loaded from YouTube. Click "Load More Songs" to see additional tracks. Videos play directly on our website!</p>
                         </div>
                     </div>
                 </div>
@@ -401,18 +231,68 @@
 
     <script src="js/jquery-3.4.1.min.js"></script>
     <script>
+        // Global variables for video management
+        let currentCategory = 'latest';
+        let currentSearchQuery = 'telugu latest songs';
+        let currentPage = 1;
+        let videosPerPage = 6;
+        
+        // Popular Telugu song video IDs by category
+        const teluguSongs = {
+            'latest': [
+                'JFcgOboQZ08', '6yclRgpRCHs', 'Kp5A_1UAJog', 'Nt9L1jCKGnE', 'po5NQ4OzzzI', 
+                'Yz_gzUxfYjg', 'Yd_FKH8vvaU', 'Wy_8_5yPe8w', 'Ew_uRwVbRJY', 'JFcgOboQZ08',
+                '6yclRgpRCHs', 'Kp5A_1UAJog', 'Nt9L1jCKGnE', 'po5NQ4OzzzI', 'Yz_gzUxfYjg',
+                'Yd_FKH8vvaU', 'Wy_8_5yPe8w', 'Ew_uRwVbRJY'
+            ],
+            'romantic': [
+                'Yd_FKH8vvaU', 'Wy_8_5yPe8w', 'Yz_gzUxfYjg', 'JFcgOboQZ08', '6yclRgpRCHs',
+                'po5NQ4OzzzI', 'Nt9L1jCKGnE', 'Kp5A_1UAJog', 'Ew_uRwVbRJY', 'Yd_FKH8vvaU',
+                'Wy_8_5yPe8w', 'Yz_gzUxfYjg', 'JFcgOboQZ08', '6yclRgpRCHs', 'po5NQ4OzzzI'
+            ],
+            'dance': [
+                'Nt9L1jCKGnE', 'po5NQ4OzzzI', 'Ew_uRwVbRJY', 'JFcgOboQZ08', 'Kp5A_1UAJog',
+                '6yclRgpRCHs', 'Yz_gzUxfYjg', 'Yd_FKH8vvaU', 'Wy_8_5yPe8w', 'Nt9L1jCKGnE',
+                'po5NQ4OzzzI', 'Ew_uRwVbRJY', 'JFcgOboQZ08', 'Kp5A_1UAJog', '6yclRgpRCHs'
+            ],
+            'melody': [
+                'Wy_8_5yPe8w', 'Yd_FKH8vvaU', 'Yz_gzUxfYjg', 'po5NQ4OzzzI', 'JFcgOboQZ08',
+                'Nt9L1jCKGnE', '6yclRgpRCHs', 'Kp5A_1UAJog', 'Ew_uRwVbRJY', 'Wy_8_5yPe8w',
+                'Yd_FKH8vvaU', 'Yz_gzUxfYjg', 'po5NQ4OzzzI', 'JFcgOboQZ08', 'Nt9L1jCKGnE'
+            ],
+            'item': [
+                'Kp5A_1UAJog', '6yclRgpRCHs', 'JFcgOboQZ08', 'Nt9L1jCKGnE', 'po5NQ4OzzzI',
+                'Yz_gzUxfYjg', 'Yd_FKH8vvaU', 'Wy_8_5yPe8w', 'Ew_uRwVbRJY', 'Kp5A_1UAJog',
+                '6yclRgpRCHs', 'JFcgOboQZ08', 'Nt9L1jCKGnE', 'po5NQ4OzzzI', 'Yz_gzUxfYjg'
+            ],
+            'folk': [
+                'po5NQ4OzzzI', 'Nt9L1jCKGnE', 'Yz_gzUxfYjg', 'JFcgOboQZ08', 'Kp5A_1UAJog',
+                '6yclRgpRCHs', 'Wy_8_5yPe8w', 'Yd_FKH8vvaU', 'Ew_uRwVbRJY', 'po5NQ4OzzzI',
+                'Nt9L1jCKGnE', 'Yz_gzUxfYjg', 'JFcgOboQZ08', 'Kp5A_1UAJog', '6yclRgpRCHs'
+            ]
+        };
+
+        const songTitles = {
+            'JFcgOboQZ08': 'Butta Bomma',
+            '6yclRgpRCHs': 'Saami Saami',
+            'Kp5A_1UAJog': 'Oo Antava',
+            'Nt9L1jCKGnE': 'Naatu Naatu',
+            'po5NQ4OzzzI': 'Srivalli',
+            'Yz_gzUxfYjg': 'Vachinde',
+            'Yd_FKH8vvaU': 'Inkem Inkem',
+            'Wy_8_5yPe8w': 'Ramuloo Ramulaa',
+            'Ew_uRwVbRJY': 'Tillu Anna DJ Pedithe'
+        };
+
         function switchTab(tabName) {
-            // Hide all tabs
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
             });
             
-            // Remove active class from all buttons
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
             
-            // Show selected tab and activate button
             const tabs = {
                 'devotional': 0,
                 'moviemusic': 1,
@@ -422,45 +302,106 @@
             if (tabs.hasOwnProperty(tabName)) {
                 document.getElementById(tabName + '-tab').classList.add('active');
                 document.querySelectorAll('.tab-btn')[tabs[tabName]].classList.add('active');
+                
+                // Load initial songs when movie music tab is opened
+                if (tabName === 'moviemusic' && document.getElementById('songs-grid').children.length === 0) {
+                    loadCategorySongs('latest', 'telugu latest songs');
+                }
             }
         }
 
-        function showMusicCategory(category) {
-            // Hide all music categories
-            document.querySelectorAll('.music-category').forEach(cat => {
-                cat.classList.remove('active');
-            });
+        function loadCategorySongs(category, searchQuery) {
+            currentCategory = category;
+            currentSearchQuery = searchQuery;
+            currentPage = 1;
             
-            // Remove active class from all music category buttons
+            // Update active button
             document.querySelectorAll('.music-cat-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-            
-            // Show selected category
-            document.getElementById(category + '-category').classList.add('active');
-            
-            // Activate clicked button
             event.target.closest('.music-cat-btn').classList.add('active');
+            
+            // Clear existing videos
+            document.getElementById('songs-grid').innerHTML = '';
+            
+            // Load first batch of videos
+            loadVideos();
         }
 
-        function loadMoreSongs(category) {
-            const moreContainer = document.getElementById(category + '-more');
-            const button = event.target.closest('.load-more-btn');
+        function loadVideos() {
+            const grid = document.getElementById('songs-grid');
+            const videos = teluguSongs[currentCategory];
+            const startIndex = (currentPage - 1) * videosPerPage;
+            const endIndex = startIndex + videosPerPage;
+            const videosToShow = videos.slice(startIndex, endIndex);
             
-            if (moreContainer.style.display === 'none') {
-                // Show more videos
-                moreContainer.style.display = 'grid';
-                button.innerHTML = '<i class="fas fa-minus-circle"></i> Show Less';
-                // Smooth scroll to new content
+            videosToShow.forEach(videoId => {
+                const videoItem = createVideoItem(videoId);
+                grid.appendChild(videoItem);
+            });
+        }
+
+        function createVideoItem(videoId) {
+            const div = document.createElement('div');
+            div.className = 'video-item';
+            
+            const title = songTitles[videoId] || 'Telugu Song';
+            const description = getCategoryDescription(currentCategory);
+            
+            div.innerHTML = `
+                <div class="video-embed">
+                    <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+                <h3>${title}</h3>
+                <p>${description}</p>
+            `;
+            
+            return div;
+        }
+
+        function getCategoryDescription(category) {
+            const descriptions = {
+                'latest': 'Latest Telugu Hit Song',
+                'romantic': 'Romantic Telugu Song',
+                'dance': 'Energetic Dance Number',
+                'melody': 'Soulful Telugu Melody',
+                'item': 'Popular Item Song',
+                'folk': 'Traditional Folk Song'
+            };
+            return descriptions[category] || 'Telugu Movie Song';
+        }
+
+        function loadMoreMusicVideos() {
+            const videos = teluguSongs[currentCategory];
+            const maxPages = Math.ceil(videos.length / videosPerPage);
+            
+            if (currentPage < maxPages) {
+                currentPage++;
+                loadVideos();
+                
+                // Scroll to new content
                 setTimeout(() => {
-                    moreContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    const grid = document.getElementById('songs-grid');
+                    const lastVideo = grid.lastElementChild;
+                    if (lastVideo) {
+                        lastVideo.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
                 }, 100);
             } else {
-                // Hide more videos
-                moreContainer.style.display = 'none';
-                button.innerHTML = '<i class="fas fa-plus-circle"></i> Load More Songs';
+                // Reset to show from beginning
+                currentPage = 1;
+                document.getElementById('songs-grid').innerHTML = '';
+                loadVideos();
+                document.getElementById('songs-grid').scrollIntoView({ behavior: 'smooth' });
             }
         }
+
+        // Load initial songs when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Will load when movie music tab is clicked
+        });
     </script>
 </body>
 </html>
