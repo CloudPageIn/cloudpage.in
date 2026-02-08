@@ -136,22 +136,22 @@
                     
                     <!-- Music Category Buttons -->
                     <div class="music-category-buttons">
-                        <button class="music-cat-btn active" onclick="loadCategorySongs('latest', 'telugu latest songs')">
+                        <button class="music-cat-btn active" data-category="latest">
                             <i class="fas fa-fire"></i> Latest Hits
                         </button>
-                        <button class="music-cat-btn" onclick="loadCategorySongs('romantic', 'telugu romantic songs')">
+                        <button class="music-cat-btn" data-category="romantic">
                             <i class="fas fa-heart"></i> Romantic
                         </button>
-                        <button class="music-cat-btn" onclick="loadCategorySongs('dance', 'telugu dance songs')">
+                        <button class="music-cat-btn" data-category="dance">
                             <i class="fas fa-music"></i> Dance
                         </button>
-                        <button class="music-cat-btn" onclick="loadCategorySongs('melody', 'telugu melody songs')">
+                        <button class="music-cat-btn" data-category="melody">
                             <i class="fas fa-guitar"></i> Melody
                         </button>
-                        <button class="music-cat-btn" onclick="loadCategorySongs('item', 'telugu item songs')">
+                        <button class="music-cat-btn" data-category="item">
                             <i class="fas fa-star"></i> Item Songs
                         </button>
-                        <button class="music-cat-btn" onclick="loadCategorySongs('folk', 'telugu folk songs')">
+                        <button class="music-cat-btn" data-category="folk">
                             <i class="fas fa-drum"></i> Folk
                         </button>
                     </div>
@@ -162,8 +162,8 @@
                             <!-- Videos will be loaded here dynamically -->
                         </div>
                         
-                        <div class="load-more-btn-container">
-                            <button class="load-more-btn" id="load-more-music-btn" onclick="loadMoreMusicVideos()">
+                        <div class="load-more-btn-container" id="load-more-container" style="display: none;">
+                            <button class="load-more-btn" id="load-more-music-btn">
                                 <i class="fas fa-plus-circle"></i> Load More Songs
                             </button>
                         </div>
@@ -172,7 +172,7 @@
                     <div class="music-info" style="margin-top: 30px;">
                         <div class="info-box">
                             <i class="fas fa-info-circle"></i>
-                            <p>Songs are loaded from YouTube. Click "Load More Songs" to see additional tracks. Videos play directly on our website!</p>
+                            <p>Songs are loaded from YouTube. Click category buttons to see different types of Telugu songs. Videos play directly on our website!</p>
                         </div>
                     </div>
                 </div>
@@ -233,149 +233,98 @@
     <script>
         // Global variables for video management
         let currentCategory = 'latest';
-        let currentSearchQuery = 'telugu latest songs';
         let currentPage = 1;
         let videosPerPage = 6;
         let videoTitleCache = {}; // Cache for fetched titles
         let isLoading = false;
         
-        // Verified working Telugu song video IDs by category (all videos are available and working)
+        // Verified working Telugu song video IDs by category
         const teluguSongs = {
             'latest': [
-                // 2024-2025 Latest Telugu Hits
-                'JFcgOboQZ08', // Butta Bomma - Ala Vaikunthapurramuloo
-                'po5NQ4OzzzI', // Srivalli - Pushpa
-                'Nt9L1jCKGnE', // Naatu Naatu - RRR
-                'Kp5A_1UAJog', // Oo Antava - Pushpa
-                '6yclRgpRCHs', // Saami Saami - Pushpa
-                'RLzC55ai0eo', // Kaavaalaa - Jailer
-                'X3n5Pk8fkLg', // Arabic Kuthu - Beast
-                'YjBRJwwJV6M', // Besharam Rang - Pathaan
-                'qFkNATtc3mc', // Jhoome Jo Pathaan - Pathaan
-                'dCIwep2bbo8', // Halamithi Habibo - Ala Vaikunthapurramuloo
-                'Yz_gzUxfYjg', // Vachinde - Fidaa
-                'Yd_FKH8vvaU', // Inkem Inkem - Geetha Govindam
-                'Wy_8_5yPe8w', // Ramuloo Ramulaa - Ala Vaikunthapurramuloo
-                'Ew_uRwVbRJY', // Tillu Anna DJ Pedithe - DJ Tillu
-                'JFcgOboQZ08', // Butta Bomma (repeat for more content)
-                'po5NQ4OzzzI', // Srivalli (repeat)
-                'Nt9L1jCKGnE', // Naatu Naatu (repeat)
-                'Kp5A_1UAJog'  // Oo Antava (repeat)
+                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
+                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
+                { id: 'Nt9L1jCKGnE', title: 'Naatu Naatu - RRR' },
+                { id: 'Kp5A_1UAJog', title: 'Oo Antava - Pushpa' },
+                { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
+                { id: 'Yz_gzUxfYjg', title: 'Vachinde - Fidaa' },
+                { id: 'Yd_FKH8vvaU', title: 'Inkem Inkem - Geetha Govindam' },
+                { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' },
+                { id: 'dCIwep2bbo8', title: 'Halamithi Habibo - Ala Vaikunthapurramuloo' },
+                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
+                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
+                { id: 'Nt9L1jCKGnE', title: 'Naatu Naatu - RRR' }
             ],
             'romantic': [
-                // Romantic Telugu Songs
-                'Yd_FKH8vvaU', // Inkem Inkem - Geetha Govindam
-                'JFcgOboQZ08', // Butta Bomma - Ala Vaikunthapurramuloo
-                'Yz_gzUxfYjg', // Vachinde - Fidaa
-                'po5NQ4OzzzI', // Srivalli - Pushpa
-                'dCIwep2bbo8', // Halamithi Habibo - Ala Vaikunthapurramuloo
-                'Wy_8_5yPe8w', // Ramuloo Ramulaa - Ala Vaikunthapurramuloo
-                '6yclRgpRCHs', // Saami Saami - Pushpa
-                'Yd_FKH8vvaU', // Inkem Inkem (repeat)
-                'JFcgOboQZ08', // Butta Bomma (repeat)
-                'Yz_gzUxfYjg', // Vachinde (repeat)
-                'po5NQ4OzzzI', // Srivalli (repeat)
-                'dCIwep2bbo8', // Halamithi Habibo (repeat)
-                'Wy_8_5yPe8w', // Ramuloo Ramulaa (repeat)
-                '6yclRgpRCHs', // Saami Saami (repeat)
-                'Yd_FKH8vvaU'  // Inkem Inkem (repeat)
+                { id: 'Yd_FKH8vvaU', title: 'Inkem Inkem - Geetha Govindam' },
+                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
+                { id: 'Yz_gzUxfYjg', title: 'Vachinde - Fidaa' },
+                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
+                { id: 'dCIwep2bbo8', title: 'Halamithi Habibo - Ala Vaikunthapurramuloo' },
+                { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' },
+                { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
+                { id: 'Yd_FKH8vvaU', title: 'Inkem Inkem - Geetha Govindam' },
+                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
+                { id: 'Yz_gzUxfYjg', title: 'Vachinde - Fidaa' },
+                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
+                { id: 'dCIwep2bbo8', title: 'Halamithi Habibo - Ala Vaikunthapurramuloo' }
             ],
             'dance': [
-                // Dance & Party Telugu Songs
-                'Nt9L1jCKGnE', // Naatu Naatu - RRR
-                'Kp5A_1UAJog', // Oo Antava - Pushpa
-                'Ew_uRwVbRJY', // Tillu Anna DJ Pedithe - DJ Tillu
-                'X3n5Pk8fkLg', // Arabic Kuthu - Beast
-                'RLzC55ai0eo', // Kaavaalaa - Jailer
-                'po5NQ4OzzzI', // Srivalli - Pushpa
-                '6yclRgpRCHs', // Saami Saami - Pushpa
-                'JFcgOboQZ08', // Butta Bomma - Ala Vaikunthapurramuloo
-                'Nt9L1jCKGnE', // Naatu Naatu (repeat)
-                'Kp5A_1UAJog', // Oo Antava (repeat)
-                'Ew_uRwVbRJY', // Tillu Anna (repeat)
-                'X3n5Pk8fkLg', // Arabic Kuthu (repeat)
-                'RLzC55ai0eo', // Kaavaalaa (repeat)
-                'po5NQ4OzzzI', // Srivalli (repeat)
-                '6yclRgpRCHs'  // Saami Saami (repeat)
+                { id: 'Nt9L1jCKGnE', title: 'Naatu Naatu - RRR' },
+                { id: 'Kp5A_1UAJog', title: 'Oo Antava - Pushpa' },
+                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
+                { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
+                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
+                { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' },
+                { id: 'Nt9L1jCKGnE', title: 'Naatu Naatu - RRR' },
+                { id: 'Kp5A_1UAJog', title: 'Oo Antava - Pushpa' },
+                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
+                { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
+                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
+                { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' }
             ],
             'melody': [
-                // Melody Telugu Songs
-                'Wy_8_5yPe8w', // Ramuloo Ramulaa - Ala Vaikunthapurramuloo
-                'Yd_FKH8vvaU', // Inkem Inkem - Geetha Govindam
-                'Yz_gzUxfYjg', // Vachinde - Fidaa
-                'po5NQ4OzzzI', // Srivalli - Pushpa
-                'JFcgOboQZ08', // Butta Bomma - Ala Vaikunthapurramuloo
-                'dCIwep2bbo8', // Halamithi Habibo - Ala Vaikunthapurramuloo
-                '6yclRgpRCHs', // Saami Saami - Pushpa
-                'Wy_8_5yPe8w', // Ramuloo Ramulaa (repeat)
-                'Yd_FKH8vvaU', // Inkem Inkem (repeat)
-                'Yz_gzUxfYjg', // Vachinde (repeat)
-                'po5NQ4OzzzI', // Srivalli (repeat)
-                'JFcgOboQZ08', // Butta Bomma (repeat)
-                'dCIwep2bbo8', // Halamithi Habibo (repeat)
-                '6yclRgpRCHs', // Saami Saami (repeat)
-                'Wy_8_5yPe8w'  // Ramuloo Ramulaa (repeat)
+                { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' },
+                { id: 'Yd_FKH8vvaU', title: 'Inkem Inkem - Geetha Govindam' },
+                { id: 'Yz_gzUxfYjg', title: 'Vachinde - Fidaa' },
+                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
+                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
+                { id: 'dCIwep2bbo8', title: 'Halamithi Habibo - Ala Vaikunthapurramuloo' },
+                { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
+                { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' },
+                { id: 'Yd_FKH8vvaU', title: 'Inkem Inkem - Geetha Govindam' },
+                { id: 'Yz_gzUxfYjg', title: 'Vachinde - Fidaa' },
+                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
+                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' }
             ],
             'item': [
-                // Item Songs Telugu
-                'Kp5A_1UAJog', // Oo Antava - Pushpa
-                '6yclRgpRCHs', // Saami Saami - Pushpa
-                'RLzC55ai0eo', // Kaavaalaa - Jailer
-                'X3n5Pk8fkLg', // Arabic Kuthu - Beast
-                'Nt9L1jCKGnE', // Naatu Naatu - RRR
-                'Ew_uRwVbRJY', // Tillu Anna DJ Pedithe - DJ Tillu
-                'JFcgOboQZ08', // Butta Bomma - Ala Vaikunthapurramuloo
-                'po5NQ4OzzzI', // Srivalli - Pushpa
-                'Kp5A_1UAJog', // Oo Antava (repeat)
-                '6yclRgpRCHs', // Saami Saami (repeat)
-                'RLzC55ai0eo', // Kaavaalaa (repeat)
-                'X3n5Pk8fkLg', // Arabic Kuthu (repeat)
-                'Nt9L1jCKGnE', // Naatu Naatu (repeat)
-                'Ew_uRwVbRJY', // Tillu Anna (repeat)
-                'JFcgOboQZ08'  // Butta Bomma (repeat)
+                { id: 'Kp5A_1UAJog', title: 'Oo Antava - Pushpa' },
+                { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
+                { id: 'Nt9L1jCKGnE', title: 'Naatu Naatu - RRR' },
+                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
+                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
+                { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' },
+                { id: 'Kp5A_1UAJog', title: 'Oo Antava - Pushpa' },
+                { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
+                { id: 'Nt9L1jCKGnE', title: 'Naatu Naatu - RRR' },
+                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
+                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
+                { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' }
             ],
             'folk': [
-                // Folk & Traditional Telugu Songs
-                'po5NQ4OzzzI', // Srivalli - Pushpa
-                'Nt9L1jCKGnE', // Naatu Naatu - RRR
-                'Yz_gzUxfYjg', // Vachinde - Fidaa
-                'JFcgOboQZ08', // Butta Bomma - Ala Vaikunthapurramuloo
-                'Kp5A_1UAJog', // Oo Antava - Pushpa
-                '6yclRgpRCHs', // Saami Saami - Pushpa
-                'Wy_8_5yPe8w', // Ramuloo Ramulaa - Ala Vaikunthapurramuloo
-                'dCIwep2bbo8', // Halamithi Habibo - Ala Vaikunthapurramuloo
-                'po5NQ4OzzzI', // Srivalli (repeat)
-                'Nt9L1jCKGnE', // Naatu Naatu (repeat)
-                'Yz_gzUxfYjg', // Vachinde (repeat)
-                'JFcgOboQZ08', // Butta Bomma (repeat)
-                'Kp5A_1UAJog', // Oo Antava (repeat)
-                '6yclRgpRCHs', // Saami Saami (repeat)
-                'Wy_8_5yPe8w'  // Ramuloo Ramulaa (repeat)
+                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
+                { id: 'Nt9L1jCKGnE', title: 'Naatu Naatu - RRR' },
+                { id: 'Yz_gzUxfYjg', title: 'Vachinde - Fidaa' },
+                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
+                { id: 'Kp5A_1UAJog', title: 'Oo Antava - Pushpa' },
+                { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
+                { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' },
+                { id: 'dCIwep2bbo8', title: 'Halamithi Habibo - Ala Vaikunthapurramuloo' },
+                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
+                { id: 'Nt9L1jCKGnE', title: 'Naatu Naatu - RRR' },
+                { id: 'Yz_gzUxfYjg', title: 'Vachinde - Fidaa' },
+                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' }
             ]
         };
-
-        // Fetch video title from YouTube using oEmbed API
-        async function fetchVideoTitle(videoId) {
-            // Check cache first
-            if (videoTitleCache[videoId]) {
-                return videoTitleCache[videoId];
-            }
-
-            try {
-                const response = await fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`);
-                if (response.ok) {
-                    const data = await response.json();
-                    const title = data.title || 'Telugu Song';
-                    videoTitleCache[videoId] = title;
-                    return title;
-                }
-            } catch (error) {
-                console.log('Error fetching title for video:', videoId);
-            }
-            
-            // Fallback to generic title
-            return getCategoryDescription(currentCategory);
-        }
 
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(tab => {
@@ -398,36 +347,40 @@
                 
                 // Load initial songs when movie music tab is opened
                 if (tabName === 'moviemusic' && document.getElementById('songs-grid').children.length === 0) {
-                    loadCategorySongs('latest', 'telugu latest songs');
+                    loadCategorySongs('latest');
                 }
             }
         }
 
-        function loadCategorySongs(category, searchQuery) {
+        function loadCategorySongs(category) {
             if (isLoading) return;
             
             currentCategory = category;
-            currentSearchQuery = searchQuery;
             currentPage = 1;
             
             // Update active button
             document.querySelectorAll('.music-cat-btn').forEach(btn => {
                 btn.classList.remove('active');
+                if (btn.getAttribute('data-category') === category) {
+                    btn.classList.add('active');
+                }
             });
-            event.target.closest('.music-cat-btn').classList.add('active');
             
             // Clear existing videos and show loading
             const grid = document.getElementById('songs-grid');
-            grid.innerHTML = '<div class="loading-message"><i class="fas fa-spinner fa-spin"></i> Loading Telugu songs from YouTube...</div>';
+            grid.innerHTML = '<div class="loading-message"><i class="fas fa-spinner fa-spin"></i> Loading ' + getCategoryName(category) + ' songs...</div>';
+            
+            // Hide load more button initially
+            document.getElementById('load-more-container').style.display = 'none';
             
             // Load first batch of videos with delay
             setTimeout(() => {
                 grid.innerHTML = '';
                 loadVideos();
-            }, 800);
+            }, 500);
         }
 
-        async function loadVideos() {
+        function loadVideos() {
             if (isLoading) return;
             isLoading = true;
             
@@ -437,51 +390,50 @@
             const endIndex = startIndex + videosPerPage;
             const videosToShow = videos.slice(startIndex, endIndex);
             
-            // Create placeholder items first
-            const placeholders = [];
-            videosToShow.forEach(videoId => {
-                const placeholder = createPlaceholderItem(videoId);
-                grid.appendChild(placeholder);
-                placeholders.push({ element: placeholder, videoId: videoId });
+            // Create video items
+            videosToShow.forEach(video => {
+                const videoItem = createVideoItem(video);
+                grid.appendChild(videoItem);
             });
             
-            // Fetch titles with staggered delay (to avoid rate limiting)
-            for (let i = 0; i < placeholders.length; i++) {
-                const { element, videoId } = placeholders[i];
-                
-                // Add delay between requests (500ms to be safe)
-                await new Promise(resolve => setTimeout(resolve, i * 500));
-                
-                const title = await fetchVideoTitle(videoId);
-                updateVideoItemWithTitle(element, title);
+            // Show/hide load more button
+            const loadMoreContainer = document.getElementById('load-more-container');
+            if (endIndex < videos.length) {
+                loadMoreContainer.style.display = 'block';
+            } else {
+                loadMoreContainer.style.display = 'none';
             }
             
             isLoading = false;
         }
 
-        function createPlaceholderItem(videoId) {
+        function createVideoItem(video) {
             const div = document.createElement('div');
             div.className = 'video-item';
-            div.dataset.videoId = videoId;
             
             div.innerHTML = `
                 <div class="video-embed">
-                    <iframe src="https://www.youtube.com/embed/${videoId}?rel=0" frameborder="0" 
+                    <iframe src="https://www.youtube.com/embed/${video.id}?rel=0" frameborder="0" 
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                             allowfullscreen loading="lazy"></iframe>
                 </div>
-                <h3><i class="fas fa-spinner fa-spin"></i> Fetching song name...</h3>
+                <h3>${video.title}</h3>
                 <p>${getCategoryDescription(currentCategory)}</p>
             `;
             
             return div;
         }
 
-        function updateVideoItemWithTitle(element, title) {
-            const h3 = element.querySelector('h3');
-            if (h3) {
-                h3.innerHTML = title;
-            }
+        function getCategoryName(category) {
+            const names = {
+                'latest': 'Latest Hits',
+                'romantic': 'Romantic',
+                'dance': 'Dance',
+                'melody': 'Melody',
+                'item': 'Item Songs',
+                'folk': 'Folk'
+            };
+            return names[category] || 'Telugu';
         }
 
         function getCategoryDescription(category) {
@@ -496,7 +448,7 @@
             return descriptions[category] || 'Telugu Movie Song';
         }
 
-        async function loadMoreMusicVideos() {
+        function loadMoreMusicVideos() {
             if (isLoading) return;
             
             const videos = teluguSongs[currentCategory];
@@ -508,7 +460,7 @@
             
             if (currentPage < maxPages) {
                 currentPage++;
-                await loadVideos();
+                loadVideos();
                 
                 // Scroll to new content
                 setTimeout(() => {
@@ -518,21 +470,24 @@
                         lastVideo.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                     }
                 }, 100);
-            } else {
-                // Reset to show from beginning
-                currentPage = 1;
-                document.getElementById('songs-grid').innerHTML = '';
-                await loadVideos();
-                document.getElementById('songs-grid').scrollIntoView({ behavior: 'smooth' });
             }
             
             btn.innerHTML = '<i class="fas fa-plus-circle"></i> Load More Songs';
             btn.disabled = false;
         }
 
-        // Load initial songs when page loads
+        // Setup category button click handlers
         document.addEventListener('DOMContentLoaded', function() {
-            // Will load when movie music tab is clicked
+            // Add click handlers to category buttons
+            document.querySelectorAll('.music-cat-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    loadCategorySongs(category);
+                });
+            });
+            
+            // Add click handler to load more button
+            document.getElementById('load-more-music-btn').addEventListener('click', loadMoreMusicVideos);
         });
     </script>
 </body>
