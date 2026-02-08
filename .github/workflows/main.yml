@@ -14,7 +14,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          repository: CloudPageIn/info.cloudpage.in
+          repository: CloudPageIn/cloudpage.in
           # role-to-assume: 
           # role-session-name:
           # aws-region: 
