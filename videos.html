@@ -236,53 +236,66 @@
         let currentSearchQuery = 'telugu latest songs';
         let currentPage = 1;
         let videosPerPage = 6;
+        let videoTitleCache = {}; // Cache for fetched titles
+        let isLoading = false;
         
         // Popular Telugu song video IDs by category
         const teluguSongs = {
             'latest': [
                 'JFcgOboQZ08', '6yclRgpRCHs', 'Kp5A_1UAJog', 'Nt9L1jCKGnE', 'po5NQ4OzzzI', 
-                'Yz_gzUxfYjg', 'Yd_FKH8vvaU', 'Wy_8_5yPe8w', 'Ew_uRwVbRJY', 'JFcgOboQZ08',
-                '6yclRgpRCHs', 'Kp5A_1UAJog', 'Nt9L1jCKGnE', 'po5NQ4OzzzI', 'Yz_gzUxfYjg',
+                'Yz_gzUxfYjg', 'Yd_FKH8vvaU', 'Wy_8_5yPe8w', 'Ew_uRwVbRJY', 'dCIwep2bbo8',
+                'X3n5Pk8fkLg', 'YjBRJwwJV6M', 'qFkNATtc3mc', 'RLzC55ai0eo', 'Yz_gzUxfYjg',
                 'Yd_FKH8vvaU', 'Wy_8_5yPe8w', 'Ew_uRwVbRJY'
             ],
             'romantic': [
                 'Yd_FKH8vvaU', 'Wy_8_5yPe8w', 'Yz_gzUxfYjg', 'JFcgOboQZ08', '6yclRgpRCHs',
-                'po5NQ4OzzzI', 'Nt9L1jCKGnE', 'Kp5A_1UAJog', 'Ew_uRwVbRJY', 'Yd_FKH8vvaU',
-                'Wy_8_5yPe8w', 'Yz_gzUxfYjg', 'JFcgOboQZ08', '6yclRgpRCHs', 'po5NQ4OzzzI'
+                'po5NQ4OzzzI', 'dCIwep2bbo8', 'X3n5Pk8fkLg', 'YjBRJwwJV6M', 'qFkNATtc3mc',
+                'RLzC55ai0eo', 'Yz_gzUxfYjg', 'JFcgOboQZ08', '6yclRgpRCHs', 'po5NQ4OzzzI'
             ],
             'dance': [
                 'Nt9L1jCKGnE', 'po5NQ4OzzzI', 'Ew_uRwVbRJY', 'JFcgOboQZ08', 'Kp5A_1UAJog',
-                '6yclRgpRCHs', 'Yz_gzUxfYjg', 'Yd_FKH8vvaU', 'Wy_8_5yPe8w', 'Nt9L1jCKGnE',
+                '6yclRgpRCHs', 'Yz_gzUxfYjg', 'dCIwep2bbo8', 'X3n5Pk8fkLg', 'Nt9L1jCKGnE',
                 'po5NQ4OzzzI', 'Ew_uRwVbRJY', 'JFcgOboQZ08', 'Kp5A_1UAJog', '6yclRgpRCHs'
             ],
             'melody': [
                 'Wy_8_5yPe8w', 'Yd_FKH8vvaU', 'Yz_gzUxfYjg', 'po5NQ4OzzzI', 'JFcgOboQZ08',
-                'Nt9L1jCKGnE', '6yclRgpRCHs', 'Kp5A_1UAJog', 'Ew_uRwVbRJY', 'Wy_8_5yPe8w',
-                'Yd_FKH8vvaU', 'Yz_gzUxfYjg', 'po5NQ4OzzzI', 'JFcgOboQZ08', 'Nt9L1jCKGnE'
+                'dCIwep2bbo8', 'X3n5Pk8fkLg', 'YjBRJwwJV6M', 'qFkNATtc3mc', 'Wy_8_5yPe8w',
+                'Yd_FKH8vvaU', 'Yz_gzUxfYjg', 'po5NQ4OzzzI', 'JFcgOboQZ08', 'RLzC55ai0eo'
             ],
             'item': [
                 'Kp5A_1UAJog', '6yclRgpRCHs', 'JFcgOboQZ08', 'Nt9L1jCKGnE', 'po5NQ4OzzzI',
-                'Yz_gzUxfYjg', 'Yd_FKH8vvaU', 'Wy_8_5yPe8w', 'Ew_uRwVbRJY', 'Kp5A_1UAJog',
+                'Yz_gzUxfYjg', 'Yd_FKH8vvaU', 'Ew_uRwVbRJY', 'dCIwep2bbo8', 'Kp5A_1UAJog',
                 '6yclRgpRCHs', 'JFcgOboQZ08', 'Nt9L1jCKGnE', 'po5NQ4OzzzI', 'Yz_gzUxfYjg'
             ],
             'folk': [
                 'po5NQ4OzzzI', 'Nt9L1jCKGnE', 'Yz_gzUxfYjg', 'JFcgOboQZ08', 'Kp5A_1UAJog',
-                '6yclRgpRCHs', 'Wy_8_5yPe8w', 'Yd_FKH8vvaU', 'Ew_uRwVbRJY', 'po5NQ4OzzzI',
+                '6yclRgpRCHs', 'Wy_8_5yPe8w', 'dCIwep2bbo8', 'X3n5Pk8fkLg', 'po5NQ4OzzzI',
                 'Nt9L1jCKGnE', 'Yz_gzUxfYjg', 'JFcgOboQZ08', 'Kp5A_1UAJog', '6yclRgpRCHs'
             ]
         };
 
-        const songTitles = {
-            'JFcgOboQZ08': 'Butta Bomma',
-            '6yclRgpRCHs': 'Saami Saami',
-            'Kp5A_1UAJog': 'Oo Antava',
-            'Nt9L1jCKGnE': 'Naatu Naatu',
-            'po5NQ4OzzzI': 'Srivalli',
-            'Yz_gzUxfYjg': 'Vachinde',
-            'Yd_FKH8vvaU': 'Inkem Inkem',
-            'Wy_8_5yPe8w': 'Ramuloo Ramulaa',
-            'Ew_uRwVbRJY': 'Tillu Anna DJ Pedithe'
-        };
+        // Fetch video title from YouTube using oEmbed API
+        async function fetchVideoTitle(videoId) {
+            // Check cache first
+            if (videoTitleCache[videoId]) {
+                return videoTitleCache[videoId];
+            }
+
+            try {
+                const response = await fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`);
+                if (response.ok) {
+                    const data = await response.json();
+                    const title = data.title || 'Telugu Song';
+                    videoTitleCache[videoId] = title;
+                    return title;
+                }
+            } catch (error) {
+                console.log('Error fetching title for video:', videoId);
+            }
+            
+            // Fallback to generic title
+            return getCategoryDescription(currentCategory);
+        }
 
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(tab => {
@@ -311,6 +324,8 @@
         }
 
         function loadCategorySongs(category, searchQuery) {
+            if (isLoading) return;
+            
             currentCategory = category;
             currentSearchQuery = searchQuery;
             currentPage = 1;
@@ -321,32 +336,53 @@
             });
             event.target.closest('.music-cat-btn').classList.add('active');
             
-            // Clear existing videos
-            document.getElementById('songs-grid').innerHTML = '';
+            // Clear existing videos and show loading
+            const grid = document.getElementById('songs-grid');
+            grid.innerHTML = '<div class="loading-message"><i class="fas fa-spinner fa-spin"></i> Loading songs from YouTube...</div>';
             
-            // Load first batch of videos
-            loadVideos();
+            // Load first batch of videos with delay
+            setTimeout(() => {
+                grid.innerHTML = '';
+                loadVideos();
+            }, 500);
         }
 
-        function loadVideos() {
+        async function loadVideos() {
+            if (isLoading) return;
+            isLoading = true;
+            
             const grid = document.getElementById('songs-grid');
             const videos = teluguSongs[currentCategory];
             const startIndex = (currentPage - 1) * videosPerPage;
             const endIndex = startIndex + videosPerPage;
             const videosToShow = videos.slice(startIndex, endIndex);
             
+            // Create placeholder items first
+            const placeholders = [];
             videosToShow.forEach(videoId => {
-                const videoItem = createVideoItem(videoId);
-                grid.appendChild(videoItem);
+                const placeholder = createPlaceholderItem(videoId);
+                grid.appendChild(placeholder);
+                placeholders.push({ element: placeholder, videoId: videoId });
             });
+            
+            // Fetch titles with staggered delay (to avoid rate limiting)
+            for (let i = 0; i < placeholders.length; i++) {
+                const { element, videoId } = placeholders[i];
+                
+                // Add delay between requests
+                await new Promise(resolve => setTimeout(resolve, i * 300));
+                
+                const title = await fetchVideoTitle(videoId);
+                updateVideoItemWithTitle(element, title);
+            }
+            
+            isLoading = false;
         }
 
-        function createVideoItem(videoId) {
+        function createPlaceholderItem(videoId) {
             const div = document.createElement('div');
             div.className = 'video-item';
-            
-            const title = songTitles[videoId] || 'Telugu Song';
-            const description = getCategoryDescription(currentCategory);
+            div.dataset.videoId = videoId;
             
             div.innerHTML = `
                 <div class="video-embed">
@@ -354,11 +390,18 @@
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                             allowfullscreen></iframe>
                 </div>
-                <h3>${title}</h3>
-                <p>${description}</p>
+                <h3><i class="fas fa-spinner fa-spin"></i> Loading title...</h3>
+                <p>${getCategoryDescription(currentCategory)}</p>
             `;
             
             return div;
+        }
+
+        function updateVideoItemWithTitle(element, title) {
+            const h3 = element.querySelector('h3');
+            if (h3) {
+                h3.innerHTML = title;
+            }
         }
 
         function getCategoryDescription(category) {
@@ -373,13 +416,19 @@
             return descriptions[category] || 'Telugu Movie Song';
         }
 
-        function loadMoreMusicVideos() {
+        async function loadMoreMusicVideos() {
+            if (isLoading) return;
+            
             const videos = teluguSongs[currentCategory];
             const maxPages = Math.ceil(videos.length / videosPerPage);
             
+            const btn = document.getElementById('load-more-music-btn');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+            btn.disabled = true;
+            
             if (currentPage < maxPages) {
                 currentPage++;
-                loadVideos();
+                await loadVideos();
                 
                 // Scroll to new content
                 setTimeout(() => {
@@ -393,9 +442,12 @@
                 // Reset to show from beginning
                 currentPage = 1;
                 document.getElementById('songs-grid').innerHTML = '';
-                loadVideos();
+                await loadVideos();
                 document.getElementById('songs-grid').scrollIntoView({ behavior: 'smooth' });
             }
+            
+            btn.innerHTML = '<i class="fas fa-plus-circle"></i> Load More Songs';
+            btn.disabled = false;
         }
 
         // Load initial songs when page loads

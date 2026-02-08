@@ -448,6 +448,26 @@
     margin: 0;
 }
 
+/* Loading Message */
+.loading-message {
+    text-align: center;
+    padding: 60px 20px;
+    color: #ffcc00;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.loading-message i {
+    font-size: 32px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.load-more-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 @media (max-width: 768px) {
     .video-grid {
         grid-template-columns: 1fr;
