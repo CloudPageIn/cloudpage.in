@@ -272,6 +272,44 @@
     animation: fadeIn 0.5s ease;
 }
 
+.more-videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.load-more-btn-container {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.load-more-btn {
+    background: rgba(255, 204, 0, 0.2);
+    border: 2px solid #ffcc00;
+    color: #ffcc00;
+    padding: 15px 40px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.load-more-btn:hover {
+    background: #ffcc00;
+    color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(255, 204, 0, 0.4);
+}
+
+.load-more-btn i {
+    font-size: 18px;
+}
+
 .music-feature-card {
     background: linear-gradient(135deg, rgba(255, 204, 0, 0.15), rgba(255, 204, 0, 0.05));
     padding: 50px 40px;
