@@ -238,7 +238,7 @@
         let videoTitleCache = {}; // Cache for fetched titles
         let isLoading = false;
         
-        // Verified working Telugu song video IDs by category
+        // Telugu Regional Songs by Category
         const teluguSongs = {
             'latest': [
                 { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
@@ -246,13 +246,13 @@
                 { id: 'Nt9L1jCKGnE', title: 'Naatu Naatu - RRR' },
                 { id: 'Kp5A_1UAJog', title: 'Oo Antava - Pushpa' },
                 { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
+                { id: 'RLzC55ai0eo', title: 'Kaavaalaa - Jailer' },
                 { id: 'Yz_gzUxfYjg', title: 'Vachinde - Fidaa' },
                 { id: 'Yd_FKH8vvaU', title: 'Inkem Inkem - Geetha Govindam' },
                 { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' },
                 { id: 'dCIwep2bbo8', title: 'Halamithi Habibo - Ala Vaikunthapurramuloo' },
                 { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
-                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
-                { id: 'Nt9L1jCKGnE', title: 'Naatu Naatu - RRR' }
+                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' }
             ],
             'romantic': [
                 { id: 'Yd_FKH8vvaU', title: 'Inkem Inkem - Geetha Govindam' },
@@ -262,25 +262,25 @@
                 { id: 'dCIwep2bbo8', title: 'Halamithi Habibo - Ala Vaikunthapurramuloo' },
                 { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' },
                 { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
+                { id: 'RLzC55ai0eo', title: 'Kaavaalaa - Jailer' },
                 { id: 'Yd_FKH8vvaU', title: 'Inkem Inkem - Geetha Govindam' },
                 { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
                 { id: 'Yz_gzUxfYjg', title: 'Vachinde - Fidaa' },
-                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
-                { id: 'dCIwep2bbo8', title: 'Halamithi Habibo - Ala Vaikunthapurramuloo' }
+                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' }
             ],
             'dance': [
                 { id: 'Nt9L1jCKGnE', title: 'Naatu Naatu - RRR' },
                 { id: 'Kp5A_1UAJog', title: 'Oo Antava - Pushpa' },
+                { id: 'RLzC55ai0eo', title: 'Kaavaalaa - Jailer' },
                 { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
                 { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
                 { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
                 { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' },
                 { id: 'Nt9L1jCKGnE', title: 'Naatu Naatu - RRR' },
                 { id: 'Kp5A_1UAJog', title: 'Oo Antava - Pushpa' },
+                { id: 'RLzC55ai0eo', title: 'Kaavaalaa - Jailer' },
                 { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
-                { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
-                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
-                { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' }
+                { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' }
             ],
             'melody': [
                 { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' },
@@ -290,25 +290,25 @@
                 { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
                 { id: 'dCIwep2bbo8', title: 'Halamithi Habibo - Ala Vaikunthapurramuloo' },
                 { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
+                { id: 'RLzC55ai0eo', title: 'Kaavaalaa - Jailer' },
                 { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' },
                 { id: 'Yd_FKH8vvaU', title: 'Inkem Inkem - Geetha Govindam' },
                 { id: 'Yz_gzUxfYjg', title: 'Vachinde - Fidaa' },
-                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
-                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' }
+                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' }
             ],
             'item': [
                 { id: 'Kp5A_1UAJog', title: 'Oo Antava - Pushpa' },
                 { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
+                { id: 'RLzC55ai0eo', title: 'Kaavaalaa - Jailer' },
                 { id: 'Nt9L1jCKGnE', title: 'Naatu Naatu - RRR' },
                 { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
                 { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
                 { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' },
                 { id: 'Kp5A_1UAJog', title: 'Oo Antava - Pushpa' },
                 { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
+                { id: 'RLzC55ai0eo', title: 'Kaavaalaa - Jailer' },
                 { id: 'Nt9L1jCKGnE', title: 'Naatu Naatu - RRR' },
-                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
-                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
-                { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' }
+                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' }
             ],
             'folk': [
                 { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
@@ -319,10 +319,10 @@
                 { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
                 { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' },
                 { id: 'dCIwep2bbo8', title: 'Halamithi Habibo - Ala Vaikunthapurramuloo' },
+                { id: 'RLzC55ai0eo', title: 'Kaavaalaa - Jailer' },
                 { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
                 { id: 'Nt9L1jCKGnE', title: 'Naatu Naatu - RRR' },
-                { id: 'Yz_gzUxfYjg', title: 'Vachinde - Fidaa' },
-                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' }
+                { id: 'Yz_gzUxfYjg', title: 'Vachinde - Fidaa' }
             ]
         };
 
