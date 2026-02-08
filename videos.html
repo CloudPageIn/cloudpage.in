@@ -4,491 +4,276 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Videos - CloudPage</title>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4279482061639450"
-     crossorigin="anonymous"></script>
+
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
+
+    <!-- Styles -->
     <link rel="stylesheet" href="css/authentic-style.css">
     <link rel="stylesheet" href="css/videos-style.css">
-    <link href="assets/logo-icon.png" rel="shortcut icon" type="image/x-icon" />
+    <link rel="shortcut icon" href="assets/logo-icon.png" type="image/x-icon">
+
+    <!-- Page-safe additions -->
+    <style>
+        .playlist-wrapper iframe {
+            width: 100%;
+            height: 420px;
+            border-radius: 12px;
+        }
+
+        .video-item.featured {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 768px) {
+            .video-item.featured {
+                grid-column: span 1;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <!-- Navigation -->
-    <nav class="main-nav">
-        <div class="nav-item" onclick="window.location.href='index.html'">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-        </div>
-        <div class="nav-item" onclick="window.location.href='services.html'">
-            <i class="fas fa-laptop"></i>
-            <span>Services</span>
-        </div>
-        <div class="nav-item" onclick="window.location.href='about.html'">
-            <i class="fas fa-users"></i>
-            <span>About</span>
-        </div>
-        <div class="nav-item" onclick="window.location.href='contact.html'">
-            <i class="fas fa-envelope"></i>
-            <span>Contact</span>
-        </div>
-        <div class="nav-item active">
-            <i class="fas fa-video"></i>
-            <span>Videos</span>
-        </div>
-    </nav>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <section class="hero-section">
-            <h1 class="main-title">Our Videos</h1>
-            <p class="subtitle">Explore our devotional songs and cloud training</p>
-        </section>
+<!-- ================= NAVIGATION ================= -->
+<nav class="main-nav">
+    <div class="nav-item" onclick="location.href='index.html'">
+        <i class="fas fa-home"></i><span>Home</span>
+    </div>
+    <div class="nav-item" onclick="location.href='services.html'">
+        <i class="fas fa-laptop"></i><span>Services</span>
+    </div>
+    <div class="nav-item" onclick="location.href='about.html'">
+        <i class="fas fa-users"></i><span>About</span>
+    </div>
+    <div class="nav-item" onclick="location.href='contact.html'">
+        <i class="fas fa-envelope"></i><span>Contact</span>
+    </div>
+    <div class="nav-item active">
+        <i class="fas fa-video"></i><span>Videos</span>
+    </div>
+</nav>
 
-        <section class="video-section">
-            <div class="video-container">
-                <!-- Tab Navigation -->
-                <div class="tab-navigation">
-                    <button class="tab-btn active" onclick="switchTab('devotional')">
-                        <i class="fas fa-music"></i> Devotional Songs
-                    </button>
-                    <button class="tab-btn" onclick="switchTab('moviemusic')">
-                        <i class="fas fa-film"></i> Movie Music
-                    </button>
-                    <button class="tab-btn" onclick="switchTab('cloudai')">
-                        <i class="fas fa-cloud"></i> Cloud AI Tool
-                    </button>
-                </div>
+<!-- ================= MAIN CONTENT ================= -->
+<div class="main-content">
 
-                <!-- Devotional Songs Tab -->
-                <div id="devotional-tab" class="tab-content active">
-                    <h2 class="section-title">Devotional Songs Collection</h2>
-                    
-                    <!-- Subscribe Button -->
-                    <div class="subscribe-section">
-                        <a href="https://www.youtube.com/@Srisakthiswaram?sub_confirmation=1" target="_blank" class="subscribe-btn">
-                            <i class="fab fa-youtube"></i>
-                            Subscribe to Our Channel
-                        </a>
-                    </div>
-                    
-                    <div class="video-grid">
-                        <div class="video-item">
-                            <div class="video-embed">
-                                <iframe src="https://www.youtube.com/embed/TrgsHgKvRtI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <h3>Mahadeva Songs</h3>
-                            <p>Divine collection of Lord Shiva devotional songs</p>
-                            <a href="https://www.youtube.com/watch?v=TrgsHgKvRtI&list=PL2Ly4y47Fpp6txzf25XkjaDkudpjW4uZn&index=2" target="_blank" class="playlist-link">
-                                <i class="fas fa-list"></i> View Full Playlist
-                            </a>
-                        </div>
-                        
-                        <div class="video-item">
-                            <div class="video-embed">
-                                <iframe src="https://www.youtube.com/embed/REWvEEK30hs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <h3>Durgamma Songs</h3>
-                            <p>Powerful devotional songs of Goddess Durga</p>
-                            <a href="https://www.youtube.com/watch?v=REWvEEK30hs&list=PL2Ly4y47Fpp4ej4zOjNjcX2NtR7Edi18U&index=2" target="_blank" class="playlist-link">
-                                <i class="fas fa-list"></i> View Full Playlist
-                            </a>
-                        </div>
-                        
-                        <div class="video-item">
-                            <div class="video-embed">
-                                <iframe src="https://www.youtube.com/embed/TJ13YTXf-6A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <h3>Narayana Songs</h3>
-                            <p>Sacred hymns dedicated to Lord Vishnu</p>
-                            <a href="https://www.youtube.com/watch?v=TJ13YTXf-6A&list=PL2Ly4y47Fpp6GzZfN0y8mCXFlYod44Wcs&index=2" target="_blank" class="playlist-link">
-                                <i class="fas fa-list"></i> View Full Playlist
-                            </a>
-                        </div>
-                        
-                        <div class="video-item">
-                            <div class="video-embed">
-                                <iframe src="https://www.youtube.com/embed/NOySNV2odR0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <h3>Shree Rama Songs</h3>
-                            <p>Melodious devotional songs of Lord Rama</p>
-                            <a href="https://www.youtube.com/watch?v=NOySNV2odR0&list=PL2Ly4y47Fpp5oGaSuqCkvYIg9RJSnM8ie&index=2" target="_blank" class="playlist-link">
-                                <i class="fas fa-list"></i> View Full Playlist
-                            </a>
-                        </div>
-                        
-                        <div class="video-item">
-                            <div class="video-embed">
-                                <iframe src="https://www.youtube.com/embed/Tp29hCBgNns" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <h3>Sai Baba Songs</h3>
-                            <p>Peaceful devotional songs of Shirdi Sai Baba</p>
-                            <a href="https://www.youtube.com/watch?v=Tp29hCBgNns&list=PL2Ly4y47Fpp7V00tuIJSEJ5FdFwCwnrjA&index=1" target="_blank" class="playlist-link">
-                                <i class="fas fa-list"></i> View Full Playlist
-                            </a>
-                        </div>
-                    </div>
-                </div>
+<!-- HERO -->
+<section class="hero-section">
+    <h1 class="main-title">Our Videos</h1>
+    <p class="subtitle">Devotional songs, Telugu movie music & Cloud training</p>
+</section>
 
-                <!-- Movie Music Tab -->
-                <div id="moviemusic-tab" class="tab-content">
-                    <h2 class="section-title">Telugu Latest Movie Songs</h2>
-                    <p class="section-description">Select a category to watch songs</p>
-                    
-                    <!-- Music Category Buttons -->
-                    <div class="music-category-buttons">
-                        <button class="music-cat-btn active" data-category="latest">
-                            <i class="fas fa-fire"></i> Latest Hits
-                        </button>
-                        <button class="music-cat-btn" data-category="romantic">
-                            <i class="fas fa-heart"></i> Romantic
-                        </button>
-                        <button class="music-cat-btn" data-category="dance">
-                            <i class="fas fa-music"></i> Dance
-                        </button>
-                        <button class="music-cat-btn" data-category="melody">
-                            <i class="fas fa-guitar"></i> Melody
-                        </button>
-                        <button class="music-cat-btn" data-category="item">
-                            <i class="fas fa-star"></i> Item Songs
-                        </button>
-                        <button class="music-cat-btn" data-category="folk">
-                            <i class="fas fa-drum"></i> Folk
-                        </button>
-                    </div>
+<section class="video-section">
+<div class="video-container">
 
-                    <!-- Dynamic Video Container -->
-                    <div id="dynamic-videos-container">
-                        <div class="video-grid" id="songs-grid">
-                            <!-- Videos will be loaded here dynamically -->
-                        </div>
-                        
-                        <div class="load-more-btn-container" id="load-more-container" style="display: none;">
-                            <button class="load-more-btn" id="load-more-music-btn">
-                                <i class="fas fa-plus-circle"></i> Load More Songs
-                            </button>
-                        </div>
-                    </div>
+<!-- ================= TAB NAV ================= -->
+<div class="tab-navigation">
+    <button class="tab-btn active" onclick="switchTab('devotional')">
+        <i class="fas fa-music"></i> Devotional Songs
+    </button>
+    <button class="tab-btn" onclick="switchTab('moviemusic')">
+        <i class="fas fa-film"></i> Movie Music
+    </button>
+    <button class="tab-btn" onclick="switchTab('cloudai')">
+        <i class="fas fa-cloud"></i> Cloud AI Tool
+    </button>
+</div>
 
-                    <div class="music-info" style="margin-top: 30px;">
-                        <div class="info-box">
-                            <i class="fas fa-info-circle"></i>
-                            <p>Songs are loaded from YouTube. Click category buttons to see different types of Telugu songs. Videos play directly on our website!</p>
-                        </div>
-                    </div>
-                </div>
+<!-- ================= DEVOTIONAL TAB ================= -->
+<div id="devotional-tab" class="tab-content active">
+    <h2 class="section-title">Devotional Songs Collection</h2>
 
-                <!-- Cloud AI Tool Tab -->
-                <div id="cloudai-tab" class="tab-content">
-                    <h2 class="section-title">Cloud Application Training</h2>
-                    <p class="section-description">Learn cloud technologies and AI tools with our comprehensive training videos</p>
-                    
-                    <div class="video-grid">
-                        <div class="video-item featured">
-                            <div class="video-embed large">
-                                <iframe src="https://www.youtube.com/embed/videoseries?list=PLJrwx0UufZfMn_YLlQr8g6Kqm8NbT5WCS" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <h3>Cloud Application Training Series</h3>
-                            <p>Complete training course on cloud applications, AI tools, and modern cloud infrastructure. Learn from basics to advanced concepts.</p>
-                            <a href="https://www.youtube.com/playlist?list=PLJrwx0UufZfMn_YLlQr8g6Kqm8NbT5WCS" target="_blank" class="playlist-link">
-                                <i class="fas fa-play-circle"></i> Watch Full Playlist on YouTube
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="training-features">
-                        <div class="feature-item">
-                            <i class="fas fa-graduation-cap"></i>
-                            <h4>Comprehensive Learning</h4>
-                            <p>Step-by-step tutorials covering all aspects of cloud computing</p>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-code"></i>
-                            <h4>Hands-on Practice</h4>
-                            <p>Real-world examples and practical implementations</p>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-certificate"></i>
-                            <h4>Expert Guidance</h4>
-                            <p>Learn from industry professionals with years of experience</p>
-                        </div>
-                    </div>
-                </div>
+    <div class="video-grid">
+        <div class="video-item">
+            <div class="video-embed">
+                <iframe src="https://www.youtube.com/embed/TrgsHgKvRtI" allowfullscreen></iframe>
             </div>
-        </section>
+            <h3>Mahadeva Songs</h3>
+            <p>Lord Shiva devotional songs</p>
+        </div>
+
+        <div class="video-item">
+            <div class="video-embed">
+                <iframe src="https://www.youtube.com/embed/REWvEEK30hs" allowfullscreen></iframe>
+            </div>
+            <h3>Durgamma Songs</h3>
+            <p>Goddess Durga devotional songs</p>
+        </div>
+
+        <div class="video-item">
+            <div class="video-embed">
+                <iframe src="https://www.youtube.com/embed/TJ13YTXf-6A" allowfullscreen></iframe>
+            </div>
+            <h3>Narayana Songs</h3>
+            <p>Lord Vishnu devotional hymns</p>
+        </div>
+
+        <div class="video-item">
+            <div class="video-embed">
+                <iframe src="https://www.youtube.com/embed/NOySNV2odR0" allowfullscreen></iframe>
+            </div>
+            <h3>Rama Songs</h3>
+            <p>Lord Rama bhajans</p>
+        </div>
+    </div>
+</div>
+
+<!-- ================= MOVIE MUSIC TAB ================= -->
+<div id="moviemusic-tab" class="tab-content">
+    <h2 class="section-title">Telugu Movie Songs</h2>
+    <p class="section-description">Latest, Evergreen, Heartbreak & Trending Telugu hits</p>
+
+    <!-- Category buttons -->
+    <div class="music-category-buttons">
+        <button class="music-cat-btn active" data-category="latest">Latest</button>
+        <button class="music-cat-btn" data-category="evergreen">Evergreen</button>
+        <button class="music-cat-btn" data-category="heartbreak">Heartbreak</button>
+        <button class="music-cat-btn" data-category="trending">Trending</button>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/cloudpage/" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://www.facebook.com/cloudpage.in/" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/cloudpage.in" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-google-plus-g"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-dribbble"></i></a>
+    <!-- Playlist rendered inside grid -->
+    <div class="video-grid" id="songs-grid"></div>
+</div>
+
+<!-- ================= CLOUD AI TAB ================= -->
+<<!-- ================= CLOUD AI TOOL TAB ================= -->
+<div id="cloudai-tab" class="tab-content">
+    <h2 class="section-title">Cloud Application Training</h2>
+    <p class="section-description">
+        Learn cloud technologies, DevOps, and AI tools with our comprehensive training videos
+    </p>
+
+    <!-- Featured Training Playlist -->
+    <div class="video-grid">
+        <div class="video-item featured">
+            <div class="video-embed large">
+                <iframe
+                    src="https://www.youtube.com/embed/videoseries?list=PLJrwx0UufZfMn_YLlQr8g6Kqm8NbT5WCS"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    loading="lazy">
+                </iframe>
+            </div>
+
+            <h3>Cloud Application Training Series</h3>
+            <p>
+                End-to-end training on AWS, DevOps, AI tools, CI/CD pipelines, and real-world
+                cloud infrastructure use cases.
+            </p>
+
+            <a href="https://www.youtube.com/playlist?list=PLJrwx0UufZfMn_YLlQr8g6Kqm8NbT5WCS"
+               target="_blank"
+               class="playlist-link">
+                <i class="fas fa-play-circle"></i>
+                Watch Full Playlist on YouTube
+            </a>
         </div>
-        <p class="copyright">Copyright &copy; 2026 CloudPage Service</p>
-    </footer>
+    </div>
 
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script>
-        // Global variables for video management
-        let currentCategory = 'latest';
-        let currentPage = 1;
-        let videosPerPage = 6;
-        let videoTitleCache = {}; // Cache for fetched titles
-        let isLoading = false;
-        
-        // Telugu Regional Songs by Category
-        const teluguSongs = {
-            'latest': [
-                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
-                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
-                { id: 'Nt9L1jCKGnE', title: 'Naatu Naatu - RRR' },
-                { id: 'Kp5A_1UAJog', title: 'Oo Antava - Pushpa' },
-                { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
-                { id: 'RLzC55ai0eo', title: 'Kaavaalaa - Jailer' },
-                { id: 'Yz_gzUxfYjg', title: 'Vachinde - Fidaa' },
-                { id: 'Yd_FKH8vvaU', title: 'Inkem Inkem - Geetha Govindam' },
-                { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' },
-                { id: 'dCIwep2bbo8', title: 'Halamithi Habibo - Ala Vaikunthapurramuloo' },
-                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
-                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' }
-            ],
-            'romantic': [
-                { id: 'Yd_FKH8vvaU', title: 'Inkem Inkem - Geetha Govindam' },
-                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
-                { id: 'Yz_gzUxfYjg', title: 'Vachinde - Fidaa' },
-                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
-                { id: 'dCIwep2bbo8', title: 'Halamithi Habibo - Ala Vaikunthapurramuloo' },
-                { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' },
-                { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
-                { id: 'RLzC55ai0eo', title: 'Kaavaalaa - Jailer' },
-                { id: 'Yd_FKH8vvaU', title: 'Inkem Inkem - Geetha Govindam' },
-                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
-                { id: 'Yz_gzUxfYjg', title: 'Vachinde - Fidaa' },
-                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' }
-            ],
-            'dance': [
-                { id: 'Nt9L1jCKGnE', title: 'Naatu Naatu - RRR' },
-                { id: 'Kp5A_1UAJog', title: 'Oo Antava - Pushpa' },
-                { id: 'RLzC55ai0eo', title: 'Kaavaalaa - Jailer' },
-                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
-                { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
-                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
-                { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' },
-                { id: 'Nt9L1jCKGnE', title: 'Naatu Naatu - RRR' },
-                { id: 'Kp5A_1UAJog', title: 'Oo Antava - Pushpa' },
-                { id: 'RLzC55ai0eo', title: 'Kaavaalaa - Jailer' },
-                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
-                { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' }
-            ],
-            'melody': [
-                { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' },
-                { id: 'Yd_FKH8vvaU', title: 'Inkem Inkem - Geetha Govindam' },
-                { id: 'Yz_gzUxfYjg', title: 'Vachinde - Fidaa' },
-                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
-                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
-                { id: 'dCIwep2bbo8', title: 'Halamithi Habibo - Ala Vaikunthapurramuloo' },
-                { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
-                { id: 'RLzC55ai0eo', title: 'Kaavaalaa - Jailer' },
-                { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' },
-                { id: 'Yd_FKH8vvaU', title: 'Inkem Inkem - Geetha Govindam' },
-                { id: 'Yz_gzUxfYjg', title: 'Vachinde - Fidaa' },
-                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' }
-            ],
-            'item': [
-                { id: 'Kp5A_1UAJog', title: 'Oo Antava - Pushpa' },
-                { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
-                { id: 'RLzC55ai0eo', title: 'Kaavaalaa - Jailer' },
-                { id: 'Nt9L1jCKGnE', title: 'Naatu Naatu - RRR' },
-                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
-                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
-                { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' },
-                { id: 'Kp5A_1UAJog', title: 'Oo Antava - Pushpa' },
-                { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
-                { id: 'RLzC55ai0eo', title: 'Kaavaalaa - Jailer' },
-                { id: 'Nt9L1jCKGnE', title: 'Naatu Naatu - RRR' },
-                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' }
-            ],
-            'folk': [
-                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
-                { id: 'Nt9L1jCKGnE', title: 'Naatu Naatu - RRR' },
-                { id: 'Yz_gzUxfYjg', title: 'Vachinde - Fidaa' },
-                { id: 'JFcgOboQZ08', title: 'Butta Bomma - Ala Vaikunthapurramuloo' },
-                { id: 'Kp5A_1UAJog', title: 'Oo Antava - Pushpa' },
-                { id: '6yclRgpRCHs', title: 'Saami Saami - Pushpa' },
-                { id: 'Wy_8_5yPe8w', title: 'Ramuloo Ramulaa - Ala Vaikunthapurramuloo' },
-                { id: 'dCIwep2bbo8', title: 'Halamithi Habibo - Ala Vaikunthapurramuloo' },
-                { id: 'RLzC55ai0eo', title: 'Kaavaalaa - Jailer' },
-                { id: 'po5NQ4OzzzI', title: 'Srivalli - Pushpa' },
-                { id: 'Nt9L1jCKGnE', title: 'Naatu Naatu - RRR' },
-                { id: 'Yz_gzUxfYjg', title: 'Vachinde - Fidaa' }
-            ]
-        };
+    <!-- ================= TRAINING FEATURES ================= -->
+    <div class="training-features">
 
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            const tabs = {
-                'devotional': 0,
-                'moviemusic': 1,
-                'cloudai': 2
-            };
-            
-            if (tabs.hasOwnProperty(tabName)) {
-                document.getElementById(tabName + '-tab').classList.add('active');
-                document.querySelectorAll('.tab-btn')[tabs[tabName]].classList.add('active');
-                
-                // Load initial songs when movie music tab is opened
-                if (tabName === 'moviemusic' && document.getElementById('songs-grid').children.length === 0) {
-                    loadCategorySongs('latest');
-                }
-            }
-        }
+        <div class="feature-item">
+            <div class="feature-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h4>Comprehensive Learning</h4>
+            <p>
+                Step-by-step tutorials covering all aspects of cloud computing,
+                DevOps workflows, AWS services, and AI tools from basics to advanced.
+            </p>
+        </div>
 
-        function loadCategorySongs(category) {
-            if (isLoading) return;
-            
-            currentCategory = category;
-            currentPage = 1;
-            
-            // Update active button
-            document.querySelectorAll('.music-cat-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.getAttribute('data-category') === category) {
-                    btn.classList.add('active');
-                }
-            });
-            
-            // Clear existing videos and show loading
-            const grid = document.getElementById('songs-grid');
-            grid.innerHTML = '<div class="loading-message"><i class="fas fa-spinner fa-spin"></i> Loading ' + getCategoryName(category) + ' songs...</div>';
-            
-            // Hide load more button initially
-            document.getElementById('load-more-container').style.display = 'none';
-            
-            // Load first batch of videos with delay
-            setTimeout(() => {
-                grid.innerHTML = '';
-                loadVideos();
-            }, 500);
-        }
+        <div class="feature-item">
+            <div class="feature-icon">
+                <i class="fas fa-code"></i>
+            </div>
+            <h4>Hands-on Practice</h4>
+            <p>
+                Real-world examples, live demos, infrastructure setups,
+                CI/CD pipelines, and practical implementations you can follow along.
+            </p>
+        </div>
 
-        function loadVideos() {
-            if (isLoading) return;
-            isLoading = true;
-            
-            const grid = document.getElementById('songs-grid');
-            const videos = teluguSongs[currentCategory];
-            const startIndex = (currentPage - 1) * videosPerPage;
-            const endIndex = startIndex + videosPerPage;
-            const videosToShow = videos.slice(startIndex, endIndex);
-            
-            // Create video items
-            videosToShow.forEach(video => {
-                const videoItem = createVideoItem(video);
-                grid.appendChild(videoItem);
-            });
-            
-            // Show/hide load more button
-            const loadMoreContainer = document.getElementById('load-more-container');
-            if (endIndex < videos.length) {
-                loadMoreContainer.style.display = 'block';
-            } else {
-                loadMoreContainer.style.display = 'none';
-            }
-            
-            isLoading = false;
-        }
+        <div class="feature-item">
+            <div class="feature-icon">
+                <i class="fas fa-star"></i>
+            </div>
+            <h4>Expert Guidance</h4>
+            <p>
+                Learn from industry professionals with years of experience in
+                AWS, DevOps, Cloud Architecture, and enterprise-grade solutions.
+            </p>
+        </div>
 
-        function createVideoItem(video) {
-            const div = document.createElement('div');
-            div.className = 'video-item';
-            
-            div.innerHTML = `
-                <div class="video-embed">
-                    <iframe src="https://www.youtube.com/embed/${video.id}?rel=0" frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen loading="lazy"></iframe>
+    </div>
+</div>
+
+
+</div>
+</section>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <p>© 2026 CloudPage Service</p>
+</footer>
+
+<!-- ================= SCRIPTS ================= -->
+
+<script>
+/* TAB SWITCHING */
+function switchTab(tabName) {
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+    document.getElementById(tabName + '-tab').classList.add('active');
+    document.querySelector(`.tab-btn[onclick="switchTab('${tabName}')"]`).classList.add('active');
+}
+</script>
+
+<script>
+/* MOVIE MUSIC PLAYLIST HANDLER */
+document.addEventListener("DOMContentLoaded", function () {
+
+    const playlistMap = {
+        latest: "PL0ZpYcTg19EGhteu0wpzNM3KcKmhtMiJk",
+        evergreen: "PL0ZpYcTg19EG2tAQtgZZpga3rkSlEArS0",
+        heartbreak: "PL0ZpYcTg19EEHpHiPuWOE5kKIHOqaGqJq",
+        trending: "PL0ZpYcTg19EGV0VZzwi-QJTC5WBXyRcEz"
+    };
+
+    const grid = document.getElementById("songs-grid");
+    const buttons = document.querySelectorAll(".music-cat-btn");
+
+    function loadPlaylist(category) {
+        grid.innerHTML = `
+            <div class="video-item featured">
+                <div class="playlist-wrapper">
+                    <iframe
+                      src="https://www.youtube.com/embed/videoseries?list=${playlistMap[category]}"
+                      allowfullscreen>
+                    </iframe>
                 </div>
-                <h3>${video.title}</h3>
-                <p>${getCategoryDescription(currentCategory)}</p>
-            `;
-            
-            return div;
-        }
+                <h3>${category.toUpperCase()} Telugu Songs</h3>
+                <p>Curated Telugu movie playlist</p>
+            </div>
+        `;
+    }
 
-        function getCategoryName(category) {
-            const names = {
-                'latest': 'Latest Hits',
-                'romantic': 'Romantic',
-                'dance': 'Dance',
-                'melody': 'Melody',
-                'item': 'Item Songs',
-                'folk': 'Folk'
-            };
-            return names[category] || 'Telugu';
-        }
-
-        function getCategoryDescription(category) {
-            const descriptions = {
-                'latest': 'Latest Telugu Hit Song',
-                'romantic': 'Romantic Telugu Song',
-                'dance': 'Energetic Dance Number',
-                'melody': 'Soulful Telugu Melody',
-                'item': 'Popular Item Song',
-                'folk': 'Traditional Folk Song'
-            };
-            return descriptions[category] || 'Telugu Movie Song';
-        }
-
-        function loadMoreMusicVideos() {
-            if (isLoading) return;
-            
-            const videos = teluguSongs[currentCategory];
-            const maxPages = Math.ceil(videos.length / videosPerPage);
-            
-            const btn = document.getElementById('load-more-music-btn');
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading more songs...';
-            btn.disabled = true;
-            
-            if (currentPage < maxPages) {
-                currentPage++;
-                loadVideos();
-                
-                // Scroll to new content
-                setTimeout(() => {
-                    const grid = document.getElementById('songs-grid');
-                    const lastVideo = grid.lastElementChild;
-                    if (lastVideo) {
-                        lastVideo.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    }
-                }, 100);
-            }
-            
-            btn.innerHTML = '<i class="fas fa-plus-circle"></i> Load More Songs';
-            btn.disabled = false;
-        }
-
-        // Setup category button click handlers
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add click handlers to category buttons
-            document.querySelectorAll('.music-cat-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const category = this.getAttribute('data-category');
-                    loadCategorySongs(category);
-                });
-            });
-            
-            // Add click handler to load more button
-            document.getElementById('load-more-music-btn').addEventListener('click', loadMoreMusicVideos);
+    buttons.forEach(btn => {
+        btn.addEventListener("click", function () {
+            buttons.forEach(b => b.classList.remove("active"));
+            this.classList.add("active");
+            loadPlaylist(this.dataset.category);
         });
-    </script>
+    });
+
+    loadPlaylist("latest");
+});
+</script>
+
 </body>
 </html>
